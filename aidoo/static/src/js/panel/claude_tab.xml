@@ -3,33 +3,40 @@
 
     <t t-name="aidoo.ClaudeTab">
         <div class="o-aidoo-claude-tab p-1">
-            <p class="small text-muted mb-2">
-                Add Aidoo as a connector in Claude so it can talk to your Odoo.
-                Authentication is automatic (OAuth).
-            </p>
+            <p class="small text-muted mb-2" t-esc="labels.intro"/>
 
-            <div class="mb-2">
-                <label class="form-label small mb-1">MCP URL</label>
-                <div class="d-flex align-items-center gap-2">
-                    <code class="flex-grow-1 bg-light px-2 py-1 rounded small" t-esc="mcpUrl"/>
-                    <button type="button"
-                            class="btn btn-sm btn-light"
-                            t-att-class="{ 'text-success': state.copied }"
-                            t-on-click="copyMcpUrl"
-                            title="Copy MCP URL">
-                        <i class="fa" t-att-class="state.copied ? 'fa-check' : 'fa-copy'"/>
-                    </button>
-                </div>
+            <p class="small text-muted mb-2" t-esc="labels.connectorIntro"/>
+
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="text-muted small" style="min-width: 40px;" t-esc="labels.nameLabel"/>
+                <code class="flex-grow-1 bg-light px-2 py-1 rounded small" t-esc="connectorName"/>
+                <button type="button"
+                        class="btn btn-sm btn-light"
+                        t-att-class="{ 'text-success': state.copiedField === 'name' }"
+                        t-on-click="copyName"
+                        t-att-title="labels.copyTitle">
+                    <i class="fa" t-att-class="state.copiedField === 'name' ? 'fa-check' : 'fa-copy'"/>
+                </button>
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="text-muted small" style="min-width: 40px;" t-esc="labels.urlLabel"/>
+                <code class="flex-grow-1 bg-light px-2 py-1 rounded small text-truncate" t-esc="connectorUrl"/>
+                <button type="button"
+                        class="btn btn-sm btn-light"
+                        t-att-class="{ 'text-success': state.copiedField === 'url' }"
+                        t-on-click="copyUrl"
+                        t-att-title="labels.copyTitle">
+                    <i class="fa" t-att-class="state.copiedField === 'url' ? 'fa-check' : 'fa-copy'"/>
+                </button>
             </div>
 
             <button type="button" class="btn btn-primary btn-sm w-100" t-on-click="openClaudeConnectors">
-                <i class="fa fa-external-link me-1"/>Open Claude connectors
+                <i class="fa fa-external-link me-1"/>
+                <span t-esc="labels.openClaude"/>
             </button>
 
-            <p class="text-muted small mt-2 mb-0">
-                Paste the URL above when Claude asks for it. Authentication
-                opens an Aidoo login window — no API key to paste.
-            </p>
+            <p class="text-muted small mt-2 mb-0" t-esc="labels.footer"/>
         </div>
     </t>
 

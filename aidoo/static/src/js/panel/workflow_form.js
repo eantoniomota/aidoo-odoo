@@ -28,6 +28,14 @@ export class WorkflowForm extends Component {
             result: null,
             error: null,
         });
+        this.labels = {
+            run: _t("Run workflow"),
+            cancel: _t("Cancel"),
+            done: _t("Done"),
+            accepted: _t("Workflow accepted."),
+            openAidoo: _t("Open Aidoo to see the live execution."),
+            launched: _t("Workflow launched on Aidoo."),
+        };
 
         onWillStart(async () => {
             try {
@@ -104,7 +112,7 @@ export class WorkflowForm extends Component {
                 this.state.error = data.error;
             } else {
                 this.state.result = data;
-                this.notification.add(_t("Workflow launched on Aidoo."), { type: "success" });
+                this.notification.add(this.labels.launched, { type: "success" });
             }
         } catch (err) {
             this.state.error = String(err?.message || err);

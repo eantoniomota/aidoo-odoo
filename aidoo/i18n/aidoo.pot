@@ -15,54 +15,31 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-# ---------------------------------------------------------------------------
-# Security: groups
-# ---------------------------------------------------------------------------
-
 #. module: aidoo
-#: model:ir.module.category,name:aidoo.module_category_aidoo
-msgid "Aidoo"
-msgstr ""
-
-#. module: aidoo
-#: model:res.groups,name:aidoo.group_aidoo_user
-msgid "User"
-msgstr ""
-
-#. module: aidoo
-#: model:res.groups,name:aidoo.group_aidoo_admin
-msgid "Administrator"
-msgstr ""
-
-# ---------------------------------------------------------------------------
-# res.config.settings — fields & help
-# ---------------------------------------------------------------------------
-
-#. module: aidoo
-#: model:ir.model.fields,field_description:aidoo.field_res_config_settings__aidoo_api_base_url
-msgid "Aidoo API base URL"
-msgstr ""
-
-#. module: aidoo
-#: model:ir.model.fields,field_description:aidoo.field_res_config_settings__aidoo_manual_api_key
 msgid "API key"
 msgstr ""
 
 #. module: aidoo
-#: model:ir.model.fields,help:aidoo.field_res_config_settings__aidoo_api_base_url
-msgid "Base URL of the Aidoo API. Defaults to https://api.aidoo.fr."
+msgid ""
+"Add Aidoo as a custom connector in Claude so it can talk to your Odoo. "
+"Authentication is automatic (OAuth)."
 msgstr ""
 
 #. module: aidoo
-#: model:ir.model.fields,help:aidoo.field_res_config_settings__aidoo_manual_api_key
-msgid ""
-"Paste the connection key generated on app.aidoo.fr → Settings → Odoo module "
-"(format: aid_odoo_…)."
+msgid "Administrator"
 msgstr ""
 
-# ---------------------------------------------------------------------------
-# res.config.settings — view labels
-# ---------------------------------------------------------------------------
+#. module: aidoo
+msgid "Advanced"
+msgstr ""
+
+#. module: aidoo
+msgid "Aidoo"
+msgstr ""
+
+#. module: aidoo
+msgid "Aidoo API base URL"
+msgstr ""
 
 #. module: aidoo
 msgid "Aidoo connection"
@@ -73,11 +50,27 @@ msgid "Aidoo connection key"
 msgstr ""
 
 #. module: aidoo
-msgid "Paste the connection key generated on your Aidoo dashboard."
+msgid "All workflows"
 msgstr ""
 
 #. module: aidoo
-msgid "This Odoo is not connected to Aidoo yet."
+msgid "Authentication opens an Aidoo login window — no API key to paste."
+msgstr ""
+
+#. module: aidoo
+msgid "Base URL of the Aidoo API. Defaults to https://api.aidoo.fr."
+msgstr ""
+
+#. module: aidoo
+msgid "Cancel"
+msgstr ""
+
+#. module: aidoo
+msgid "Claude"
+msgstr ""
+
+#. module: aidoo
+msgid "Connect Aidoo to Claude"
 msgstr ""
 
 #. module: aidoo
@@ -85,15 +78,15 @@ msgid "Connected to Aidoo."
 msgstr ""
 
 #. module: aidoo
-msgid "Generate a key at"
+msgid "Copied to clipboard."
 msgstr ""
 
 #. module: aidoo
-msgid "Advanced"
+msgid "Copy"
 msgstr ""
 
 #. module: aidoo
-msgid "Override the Aidoo API base URL (self-hosted instances only)."
+msgid "Create my Aidoo account"
 msgstr ""
 
 #. module: aidoo
@@ -104,41 +97,12 @@ msgstr ""
 msgid "Disconnect this Odoo from Aidoo? Users will no longer see the Aidoo systray."
 msgstr ""
 
-# ---------------------------------------------------------------------------
-# Python error messages
-# ---------------------------------------------------------------------------
-
 #. module: aidoo
-#. odoo-python
-#: code:addons/aidoo/models/res_config_settings.py:0
-#, python-format
-msgid ""
-"The API key must start with 'aid_odoo_'. Generate one on app.aidoo.fr → "
-"Settings → Odoo module."
-msgstr ""
-
-# ---------------------------------------------------------------------------
-# OWL: shared
-# ---------------------------------------------------------------------------
-
-#. module: aidoo
-msgid "Loading…"
-msgstr ""
-
-# ---------------------------------------------------------------------------
-# OWL: invited view
-# ---------------------------------------------------------------------------
-
-#. module: aidoo
-msgid "You have been invited to Aidoo"
+msgid "Done"
 msgstr ""
 
 #. module: aidoo
-msgid "Finish your sign-up to connect"
-msgstr ""
-
-#. module: aidoo
-msgid "to this Odoo."
+msgid "Executions"
 msgstr ""
 
 #. module: aidoo
@@ -146,61 +110,31 @@ msgid "Finish your sign-up on Aidoo to use this module."
 msgstr ""
 
 #. module: aidoo
-msgid "Create my Aidoo account"
-msgstr ""
-
-# ---------------------------------------------------------------------------
-# OWL: no-claude view
-# ---------------------------------------------------------------------------
-
-#. module: aidoo
-msgid "Connect Aidoo to Claude"
+msgid "Finish your sign-up to connect this email to Odoo."
 msgstr ""
 
 #. module: aidoo
-msgid ""
-"Your Aidoo workspace is ready. To start using AI workflows, add Aidoo as a "
-"connector in Claude."
+msgid "Generate a key at"
 msgstr ""
 
 #. module: aidoo
-msgid "Connect to Claude"
+msgid "In Claude, add a custom connector with:"
 msgstr ""
-
-#. module: aidoo
-msgid "Opening Claude…"
-msgstr ""
-
-#. module: aidoo
-msgid "We will copy the MCP URL"
-msgstr ""
-
-#. module: aidoo
-msgid "to your clipboard."
-msgstr ""
-
-# ---------------------------------------------------------------------------
-# OWL: panel header & tabs
-# ---------------------------------------------------------------------------
-
-#. module: aidoo
-msgid "Executions"
-msgstr ""
-
-#. module: aidoo
-msgid "Workflows"
-msgstr ""
-
-#. module: aidoo
-msgid "Claude"
-msgstr ""
-
-# ---------------------------------------------------------------------------
-# OWL: executions tab
-# ---------------------------------------------------------------------------
 
 #. module: aidoo
 msgid "Loading executions…"
+msgstr ""
+
+#. module: aidoo
+msgid "Loading workflows…"
+msgstr ""
+
+#. module: aidoo
+msgid "Loading…"
+msgstr ""
+
+#. module: aidoo
+msgid "Name"
 msgstr ""
 
 #. module: aidoo
@@ -208,47 +142,7 @@ msgid "No recent executions."
 msgstr ""
 
 #. module: aidoo
-msgid "Untitled"
-msgstr ""
-
-# ---------------------------------------------------------------------------
-# OWL: workflows tab
-# ---------------------------------------------------------------------------
-
-#. module: aidoo
-msgid "Loading workflows…"
-msgstr ""
-
-#. module: aidoo
-msgid "Suggested for this record"
-msgstr ""
-
-#. module: aidoo
-msgid "All workflows"
-msgstr ""
-
-#. module: aidoo
 msgid "No workflows available."
-msgstr ""
-
-# ---------------------------------------------------------------------------
-# OWL: workflow form
-# ---------------------------------------------------------------------------
-
-#. module: aidoo
-msgid "Run workflow"
-msgstr ""
-
-#. module: aidoo
-msgid "Cancel"
-msgstr ""
-
-#. module: aidoo
-msgid "Done"
-msgstr ""
-
-#. module: aidoo
-msgid "Workflow accepted."
 msgstr ""
 
 #. module: aidoo
@@ -256,42 +150,81 @@ msgid "Open Aidoo to see the live execution."
 msgstr ""
 
 #. module: aidoo
-#. odoo-javascript
-#: code:addons/aidoo/static/src/js/panel/workflow_form.js:0
-msgid "Workflow launched on Aidoo."
-msgstr ""
-
-# ---------------------------------------------------------------------------
-# OWL: claude tab
-# ---------------------------------------------------------------------------
-
-#. module: aidoo
-msgid ""
-"Add Aidoo as a connector in Claude so it can talk to your Odoo. "
-"Authentication is automatic (OAuth)."
-msgstr ""
-
-#. module: aidoo
-msgid "MCP URL"
-msgstr ""
-
-#. module: aidoo
-msgid "Copy MCP URL"
-msgstr ""
-
-#. module: aidoo
 msgid "Open Claude connectors"
 msgstr ""
 
 #. module: aidoo
-msgid ""
-"Paste the URL above when Claude asks for it. Authentication opens an Aidoo "
-"login window — no API key to paste."
+msgid "Opening Claude…"
 msgstr ""
 
 #. module: aidoo
-#. odoo-javascript
-#: code:addons/aidoo/static/src/js/auth/no_claude.js:0
-#: code:addons/aidoo/static/src/js/panel/claude_tab.js:0
-msgid "MCP URL copied to clipboard."
+msgid "Override the Aidoo API base URL (self-hosted instances only)."
+msgstr ""
+
+#. module: aidoo
+msgid "Paste the connection key generated on your Aidoo dashboard."
+msgstr ""
+
+#. module: aidoo
+msgid ""
+"Paste the connection key generated on app.aidoo.fr → Settings → Odoo module "
+"(format: aid_odoo_…)."
+msgstr ""
+
+#. module: aidoo
+msgid "Run workflow"
+msgstr ""
+
+#. module: aidoo
+msgid "Suggested for this record"
+msgstr ""
+
+#. module: aidoo
+msgid ""
+"The API key must start with 'aid_odoo_'. Generate one on app.aidoo.fr → "
+"Settings → Odoo module."
+msgstr ""
+
+#. module: aidoo
+msgid ""
+"The MCP URL (https://mcp.aidoo.fr/mcp) will also be copied to your clipboard "
+"when you click the button above."
+msgstr ""
+
+#. module: aidoo
+msgid "This Odoo is not connected to Aidoo yet."
+msgstr ""
+
+#. module: aidoo
+msgid "URL"
+msgstr ""
+
+#. module: aidoo
+msgid "Untitled"
+msgstr ""
+
+#. module: aidoo
+msgid "User"
+msgstr ""
+
+#. module: aidoo
+msgid "Workflow accepted."
+msgstr ""
+
+#. module: aidoo
+msgid "Workflow launched on Aidoo."
+msgstr ""
+
+#. module: aidoo
+msgid "Workflows"
+msgstr ""
+
+#. module: aidoo
+msgid "You have been invited to Aidoo"
+msgstr ""
+
+#. module: aidoo
+msgid ""
+"Your Aidoo workspace is ready. To start using AI workflows, add Aidoo as a "
+"custom connector in Claude with the details below."
 msgstr ""
