@@ -20,8 +20,8 @@ class ResConfigSettings(models.TransientModel):
     aidoo_instance_slug = fields.Char(
         string="Instance slug",
         config_parameter=SLUG_PARAM,
-        readonly=True,
-        help="Unique identifier of this Odoo instance on the Aidoo platform.",
+        help="Unique identifier of this Odoo instance on the Aidoo platform. "
+             "Paste here the slug generated on app.aidoo.fr → Settings → Odoo module.",
     )
     aidoo_instance_name = fields.Char(
         string="Instance name",
@@ -96,7 +96,7 @@ class ResConfigSettings(models.TransientModel):
                 if not rec.aidoo_instance_slug:
                     raise UserError(_(
                         "Provide the instance slug before saving the API key. "
-                        "Use 'Connect to Aidoo' to obtain a slug automatically."
+                        "Get it on app.aidoo.fr → Settings → Odoo module."
                     ))
                 self.aidoo_store_credentials(
                     rec.aidoo_instance_slug,
