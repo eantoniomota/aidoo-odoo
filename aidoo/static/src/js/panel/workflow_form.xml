@@ -20,10 +20,10 @@
             </t>
             <t t-elif="state.result">
                 <div class="alert alert-success small">
-                    Workflow accepted.<br/>
-                    <small class="text-muted">Open Aidoo to see the live execution.</small>
+                    <div t-esc="labels.accepted"/>
+                    <small class="text-muted" t-esc="labels.openAidoo"/>
                 </div>
-                <button class="btn btn-sm btn-secondary" t-on-click="props.onClose">Done</button>
+                <button class="btn btn-sm btn-secondary" t-on-click="props.onClose" t-esc="labels.done"/>
             </t>
             <t t-else="">
                 <form t-on-submit="submit">
@@ -67,11 +67,9 @@
                     <div class="d-flex">
                         <button type="submit" class="btn btn-primary btn-sm" t-att-disabled="state.running">
                             <t t-if="state.running"><i class="fa fa-circle-o-notch fa-spin me-1"/></t>
-                            Run workflow
+                            <span t-esc="labels.run"/>
                         </button>
-                        <button type="button" class="btn btn-link btn-sm ms-2" t-on-click="props.onClose">
-                            Cancel
-                        </button>
+                        <button type="button" class="btn btn-link btn-sm ms-2" t-on-click="props.onClose" t-esc="labels.cancel"/>
                     </div>
                 </form>
             </t>

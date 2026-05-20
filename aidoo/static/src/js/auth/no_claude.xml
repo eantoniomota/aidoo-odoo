@@ -6,24 +6,49 @@
             <div class="o-aidoo-empty-icon mb-2">
                 <i class="fa fa-plug fa-3x text-muted"/>
             </div>
-            <h5>Connect Aidoo to Claude</h5>
-            <p class="text-muted small">
-                Your Aidoo workspace is ready. To start using AI workflows,
-                add Aidoo as a connector in Claude.
-            </p>
-            <button type="button" class="btn btn-primary btn-sm" t-on-click="connectClaude">
-                <t t-if="state.copied">
-                    <i class="fa fa-check me-1"/>Opening Claude…
+            <h5 t-esc="labels.title"/>
+            <p class="text-muted small" t-esc="labels.body"/>
+
+            <div class="text-start small mb-3">
+                <p class="text-muted small mb-2" t-esc="labels.connectorIntro"/>
+
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="text-muted" style="min-width: 40px;" t-esc="labels.nameLabel"/>
+                    <code class="flex-grow-1 bg-light px-2 py-1 rounded" t-esc="connectorName"/>
+                    <button type="button"
+                            class="btn btn-sm btn-light"
+                            t-att-class="{ 'text-success': state.copiedField === 'name' }"
+                            t-on-click="copyName"
+                            t-att-title="labels.copyTitle">
+                        <i class="fa" t-att-class="state.copiedField === 'name' ? 'fa-check' : 'fa-copy'"/>
+                    </button>
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <span class="text-muted" style="min-width: 40px;" t-esc="labels.urlLabel"/>
+                    <code class="flex-grow-1 bg-light px-2 py-1 rounded text-truncate" t-esc="connectorUrl"/>
+                    <button type="button"
+                            class="btn btn-sm btn-light"
+                            t-att-class="{ 'text-success': state.copiedField === 'url' }"
+                            t-on-click="copyUrl"
+                            t-att-title="labels.copyTitle">
+                        <i class="fa" t-att-class="state.copiedField === 'url' ? 'fa-check' : 'fa-copy'"/>
+                    </button>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-sm w-100" t-on-click="connectClaude">
+                <t t-if="state.copiedField === 'opening'">
+                    <i class="fa fa-check me-1"/>
+                    <span t-esc="labels.ctaOpening"/>
                 </t>
                 <t t-else="">
-                    <i class="fa fa-external-link me-1"/>Connect to Claude
+                    <i class="fa fa-external-link me-1"/>
+                    <span t-esc="labels.ctaIdle"/>
                 </t>
             </button>
-            <p class="text-muted small mt-2">
-                We will copy the MCP URL
-                (<code class="small">https://mcp.aidoo.fr/mcp</code>)
-                to your clipboard.
-            </p>
+
+            <p class="text-muted small mt-2 mb-0" t-esc="labels.footer"/>
         </div>
     </t>
 

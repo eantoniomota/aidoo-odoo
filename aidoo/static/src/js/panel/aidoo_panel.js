@@ -2,6 +2,7 @@
 
 import { Component, useState, onWillStart } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
+import { _t } from "@web/core/l10n/translation";
 import { AidooInvited } from "../auth/invited";
 import { AidooNoClaude } from "../auth/no_claude";
 import { ExecutionsTab } from "./executions_tab";
@@ -46,6 +47,12 @@ export class AidooPanel extends Component {
             resolved: null, // { state, environment, user?, signupUrl?, mcpUrl }
             context: { model: null, resId: null },
         });
+        this.labels = {
+            loading: _t("Loading…"),
+            tabExecutions: _t("Executions"),
+            tabWorkflows: _t("Workflows"),
+            tabClaude: _t("Claude"),
+        };
 
         onWillStart(async () => {
             this.state.context = readActiveContext(this.env);

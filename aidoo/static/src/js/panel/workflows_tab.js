@@ -2,6 +2,7 @@
 
 import { Component, useState, onWillStart } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
+import { _t } from "@web/core/l10n/translation";
 import { WorkflowForm } from "./workflow_form";
 
 export class WorkflowsTab extends Component {
@@ -19,6 +20,12 @@ export class WorkflowsTab extends Component {
             selectedId: null,
             error: null,
         });
+        this.labels = {
+            loading: _t("Loading workflows…"),
+            suggested: _t("Suggested for this record"),
+            allWorkflows: _t("All workflows"),
+            empty: _t("No workflows available."),
+        };
 
         onWillStart(async () => {
             await this.refresh();

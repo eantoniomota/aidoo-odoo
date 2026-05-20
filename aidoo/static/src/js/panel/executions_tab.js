@@ -2,6 +2,7 @@
 
 import { Component, useState, onWillStart } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
+import { _t } from "@web/core/l10n/translation";
 
 export class ExecutionsTab extends Component {
     static template = "aidoo.ExecutionsTab";
@@ -16,6 +17,11 @@ export class ExecutionsTab extends Component {
             executions: [],
             error: null,
         });
+        this.labels = {
+            loading: _t("Loading executions…"),
+            empty: _t("No recent executions."),
+            untitled: _t("Untitled"),
+        };
 
         onWillStart(async () => {
             try {
