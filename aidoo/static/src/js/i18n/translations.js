@@ -1,6 +1,9 @@
 /** @odoo-module **/
 
-import { user } from "@web/core/user";
+// ``@web/session`` is available on every Odoo version we target (17 and 18),
+// whereas ``@web/core/user`` was only added in Odoo 18 and would break the
+// asset bundle on Odoo 17 — exactly the symptom we just hit.
+import { session } from "@web/session";
 
 /**
  * Embedded translations for the Aidoo OWL UI.
@@ -142,7 +145,9 @@ const LANG_ALIASES = {
 };
 
 function resolveLang() {
-    const raw = (user && user.lang) || "en_US";
+    const raw =
+        (session && session.user_context && session.user_context.lang) ||
+        "en_US";
     if (TRANSLATIONS[raw]) return raw;
     if (LANG_ALIASES[raw] && TRANSLATIONS[LANG_ALIASES[raw]]) {
         return LANG_ALIASES[raw];
