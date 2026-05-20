@@ -2,7 +2,7 @@
 
 import { Component, useState } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
-import { _t } from "@web/core/l10n/translation";
+import { t as _t } from "../i18n/translations";
 
 export class ClaudeTab extends Component {
     static template = "aidoo.ClaudeTab";
