@@ -54,5 +54,5 @@ msgstr ""
 #. odoo-python
 #: code:addons/aidoo/models/res_config_settings.py:0
 #, python-format
-msgid "Provide the instance slug before saving the API key. Use 'Connect to Aidoo' to obtain a slug automatically."
+msgid "Provide the instance slug before saving the API key. Get it on app.aidoo.fr → Settings → Odoo module."
 msgstr ""

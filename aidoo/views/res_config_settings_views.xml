@@ -11,7 +11,7 @@
                     <block title="Aidoo connection" name="aidoo_connection">
                         <setting id="aidoo_connection_setting"
                                  string="Aidoo instance"
-                                 help="Connect this Odoo to an Aidoo account.">
+                                 help="Connect this Odoo to an Aidoo account. Generate a connection key on app.aidoo.fr, then paste the slug and key below.">
                             <div class="content-group">
                                 <div class="row mt8" invisible="aidoo_api_key_set">
                                     <span class="text-warning">
@@ -22,22 +22,40 @@
                                 <div class="row mt8" invisible="not aidoo_api_key_set">
                                     <span class="text-success">
                                         <i class="fa fa-check"/>
-                                        Connected. Slug: <field name="aidoo_instance_slug" readonly="1" nolabel="1"/>
+                                        Connected to Aidoo.
                                     </span>
                                 </div>
+
                                 <div class="row mt16">
-                                    <label for="aidoo_api_base_url" class="col-3 o_light_label"/>
-                                    <field name="aidoo_api_base_url"/>
-                                </div>
-                                <div class="row">
-                                    <label for="aidoo_instance_name" class="col-3 o_light_label"/>
-                                    <field name="aidoo_instance_name" placeholder="e.g. Acme Production"/>
+                                    <label for="aidoo_instance_slug" class="col-3 o_light_label"/>
+                                    <field name="aidoo_instance_slug"
+                                           placeholder="e.g. 8f1a3c5b7e9d2f6a1b4c5d6e"/>
                                 </div>
                                 <div class="row">
                                     <label for="aidoo_manual_api_key" class="col-3 o_light_label"/>
                                     <field name="aidoo_manual_api_key" password="True"
                                            placeholder="aid_odoo_..."/>
                                 </div>
+                                <div class="row">
+                                    <label for="aidoo_instance_name" class="col-3 o_light_label"/>
+                                    <field name="aidoo_instance_name" placeholder="e.g. Acme Production"/>
+                                </div>
+                                <div class="row">
+                                    <label for="aidoo_api_base_url" class="col-3 o_light_label"/>
+                                    <field name="aidoo_api_base_url"/>
+                                </div>
+
+                                <div class="row mt16">
+                                    <div class="col-12">
+                                        <span class="text-muted">
+                                            <i class="fa fa-info-circle"/>
+                                            Get your slug and API key at
+                                            <a href="https://app.aidoo.fr" target="_blank">app.aidoo.fr</a>
+                                            → Settings → Odoo module.
+                                        </span>
+                                    </div>
+                                </div>
+
                                 <div class="row mt16" invisible="not aidoo_api_key_set">
                                     <button name="action_aidoo_disconnect" type="object"
                                             string="Disconnect" class="btn-link"

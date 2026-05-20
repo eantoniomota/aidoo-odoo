@@ -41,5 +41,5 @@ msgid "API key"
 msgstr "Clé API"
 
 #. module: aidoo
-msgid "Provide the instance slug before saving the API key. Use 'Connect to Aidoo' to obtain a slug automatically."
-msgstr "Veuillez renseigner l'identifiant d'instance avant d'enregistrer la clé API. Utilisez « Se connecter à Aidoo » pour l'obtenir automatiquement."
+msgid "Provide the instance slug before saving the API key. Get it on app.aidoo.fr → Settings → Odoo module."
+msgstr "Veuillez renseigner l'identifiant d'instance avant d'enregistrer la clé API. Récupérez-le sur app.aidoo.fr → Paramètres → Module Odoo."
