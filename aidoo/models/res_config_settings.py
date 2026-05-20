@@ -2,9 +2,7 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 API_BASE_URL_PARAM = "aidoo.api_base_url"
-SLUG_PARAM = "aidoo.slug"
 API_KEY_PARAM = "aidoo.api_key_encrypted"
-INSTANCE_NAME_PARAM = "aidoo.instance_name"
 DEFAULT_API_BASE_URL = "https://api.aidoo.fr"
 
 
@@ -17,17 +15,6 @@ class ResConfigSettings(models.TransientModel):
         default=DEFAULT_API_BASE_URL,
         help="Base URL of the Aidoo API. Defaults to https://api.aidoo.fr.",
     )
-    aidoo_instance_slug = fields.Char(
-        string="Instance slug",
-        config_parameter=SLUG_PARAM,
-        help="Unique identifier of this Odoo instance on the Aidoo platform. "
-             "Paste here the slug generated on app.aidoo.fr → Settings → Odoo module.",
-    )
-    aidoo_instance_name = fields.Char(
-        string="Instance name",
-        config_parameter=INSTANCE_NAME_PARAM,
-        help="Human-readable name for this Odoo instance on the Aidoo dashboard.",
-    )
     aidoo_api_key_set = fields.Boolean(
         string="API key configured",
         compute="_compute_aidoo_api_key_set",
@@ -35,8 +22,8 @@ class ResConfigSettings(models.TransientModel):
     aidoo_manual_api_key = fields.Char(
         string="API key",
         help=(
-            "Paste an Aidoo Odoo-instance API key (aid_odoo_…) here to connect manually. "
-            "Leave empty and use the 'Connect to Aidoo' button to register automatically."
+            "Paste the connection key generated on app.aidoo.fr → "
+            "Settings → Odoo module (format: aid_odoo_…)."
         ),
     )
 
@@ -59,10 +46,6 @@ class ResConfigSettings(models.TransientModel):
         ).rstrip("/")
 
     @api.model
-    def aidoo_get_slug(self):
-        return self.env["ir.config_parameter"].sudo().get_param(SLUG_PARAM, "")
-
-    @api.model
     def aidoo_get_api_key(self):
         encrypted = self.env["ir.config_parameter"].sudo().get_param(API_KEY_PARAM, "")
         if not encrypted:
@@ -70,20 +53,15 @@ class ResConfigSettings(models.TransientModel):
         return self.env["aidoo.encryption"].decrypt(encrypted)
 
     @api.model
-    def aidoo_store_credentials(self, slug, api_key, name=None):
-        params = self.env["ir.config_parameter"].sudo()
+    def aidoo_store_api_key(self, api_key):
+        if not api_key:
+            return
         encrypted = self.env["aidoo.encryption"].encrypt(api_key)
-        params.set_param(SLUG_PARAM, slug or "")
-        params.set_param(API_KEY_PARAM, encrypted)
-        if name:
-            params.set_param(INSTANCE_NAME_PARAM, name)
+        self.env["ir.config_parameter"].sudo().set_param(API_KEY_PARAM, encrypted)
 
     @api.model
     def aidoo_clear_credentials(self):
-        params = self.env["ir.config_parameter"].sudo()
-        params.set_param(SLUG_PARAM, "")
-        params.set_param(API_KEY_PARAM, "")
-        params.set_param(INSTANCE_NAME_PARAM, "")
+        self.env["ir.config_parameter"].sudo().set_param(API_KEY_PARAM, "")
 
     # ------------------------------------------------------------------
     # Inverse for manual key (writes the encrypted version)
@@ -93,20 +71,17 @@ class ResConfigSettings(models.TransientModel):
         super().set_values()
         for rec in self:
             if rec.aidoo_manual_api_key:
-                if not rec.aidoo_instance_slug:
+                key = rec.aidoo_manual_api_key.strip()
+                if not key.startswith("aid_odoo_"):
                     raise UserError(_(
-                        "Provide the instance slug before saving the API key. "
-                        "Get it on app.aidoo.fr → Settings → Odoo module."
+                        "The API key must start with 'aid_odoo_'. "
+                        "Generate one on app.aidoo.fr → Settings → Odoo module."
                     ))
-                self.aidoo_store_credentials(
-                    rec.aidoo_instance_slug,
-                    rec.aidoo_manual_api_key,
-                    rec.aidoo_instance_name,
-                )
+                self.aidoo_store_api_key(key)
                 rec.aidoo_manual_api_key = False
 
     # ------------------------------------------------------------------
-    # Button: open registration wizard / disconnect
+    # Disconnect button
     # ------------------------------------------------------------------
 
     def action_aidoo_disconnect(self):

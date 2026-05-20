@@ -36,16 +36,6 @@ msgid "Aidoo API base URL"
 msgstr ""
 
 #. module: aidoo
-#: model:ir.model.fields,field_description:aidoo.field_res_config_settings__aidoo_instance_slug
-msgid "Instance slug"
-msgstr ""
-
-#. module: aidoo
-#: model:ir.model.fields,field_description:aidoo.field_res_config_settings__aidoo_instance_name
-msgid "Instance name"
-msgstr ""
-
-#. module: aidoo
 #: model:ir.model.fields,field_description:aidoo.field_res_config_settings__aidoo_manual_api_key
 msgid "API key"
 msgstr ""
@@ -54,5 +44,5 @@ msgstr ""
 #. odoo-python
 #: code:addons/aidoo/models/res_config_settings.py:0
 #, python-format
-msgid "Provide the instance slug before saving the API key. Get it on app.aidoo.fr → Settings → Odoo module."
+msgid "The API key must start with 'aid_odoo_'. Generate one on app.aidoo.fr → Settings → Odoo module."
 msgstr ""
