@@ -2,6 +2,7 @@
 
 import { Component, useState } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
+import { _t } from "@web/core/l10n/translation";
 
 export class AidooNoClaude extends Component {
     static template = "aidoo.NoClaude";
@@ -19,7 +20,7 @@ export class AidooNoClaude extends Component {
         try {
             await navigator.clipboard.writeText(url);
             this.state.copied = true;
-            this.notification.add("MCP URL copied to clipboard.", { type: "success" });
+            this.notification.add(_t("MCP URL copied to clipboard."), { type: "success" });
             setTimeout(() => (this.state.copied = false), 1800);
         } catch (_err) {
             // silent — opening the connector page is still useful

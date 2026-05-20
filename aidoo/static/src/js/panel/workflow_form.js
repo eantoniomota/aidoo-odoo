@@ -2,6 +2,7 @@
 
 import { Component, useState, onWillStart } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
+import { _t } from "@web/core/l10n/translation";
 
 /**
  * Dynamic form generated from a workflow's JSON Schema.
@@ -103,7 +104,7 @@ export class WorkflowForm extends Component {
                 this.state.error = data.error;
             } else {
                 this.state.result = data;
-                this.notification.add("Workflow launched on Aidoo.", { type: "success" });
+                this.notification.add(_t("Workflow launched on Aidoo."), { type: "success" });
             }
         } catch (err) {
             this.state.error = String(err?.message || err);
