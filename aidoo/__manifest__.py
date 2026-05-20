@@ -56,4 +56,5 @@ Requires an Aidoo account at https://app.aidoo.fr.
     "images": ["static/description/banner.png"],
     "installable": True,
     "application": False,
+    "post_init_hook": "post_init_hook",
 }

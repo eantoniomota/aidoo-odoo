@@ -51,6 +51,29 @@
                             </div>
                         </setting>
 
+                        <setting id="aidoo_language_setting"
+                                 string="Interface language"
+                                 help="Language used for the Aidoo systray and panels.">
+                            <div class="content-group">
+                                <div class="row">
+                                    <label for="aidoo_user_lang" class="col-3 o_light_label"/>
+                                    <field name="aidoo_user_lang"/>
+                                </div>
+                                <div class="row mt8">
+                                    <div class="col-12">
+                                        <button name="action_aidoo_reload_translations"
+                                                type="object"
+                                                string="Reload translations"
+                                                class="btn-link"
+                                                confirm="Reload Aidoo translations for every active language? You will need to refresh the page after."/>
+                                        <span class="text-muted small ms-2">
+                                            Use this if the interface stays in English after a language change.
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </setting>
+
                         <setting id="aidoo_advanced_setting"
                                  string="Advanced"
                                  help="Override the Aidoo API base URL (self-hosted instances only).">

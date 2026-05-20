@@ -126,6 +126,22 @@ msgid "In Claude, add a custom connector with:"
 msgstr "Dans Claude, ajoutez un connecteur personnalisé avec :"
 
 #. module: aidoo
+msgid "Interface language"
+msgstr "Langue de l'interface"
+
+#. module: aidoo
+msgid "Language used for the Aidoo systray and panels."
+msgstr "Langue utilisée pour le bouton Aidoo et ses panneaux."
+
+#. module: aidoo
+msgid ""
+"Language used for the Aidoo systray and panels. Changing it updates your "
+"Odoo language preference."
+msgstr ""
+"Langue utilisée pour le bouton Aidoo et ses panneaux. Sa modification met à "
+"jour votre langue Odoo."
+
+#. module: aidoo
 msgid "Loading executions…"
 msgstr "Chargement des exécutions…"
 
@@ -165,6 +181,22 @@ msgstr "Ouverture de Claude…"
 msgid "Override the Aidoo API base URL (self-hosted instances only)."
 msgstr ""
 "Remplacer l'URL de base de l'API Aidoo (instances auto-hébergées uniquement)."
+
+#. module: aidoo
+msgid "Only Aidoo administrators can reload the translations."
+msgstr "Seuls les administrateurs Aidoo peuvent recharger les traductions."
+
+#. module: aidoo
+msgid "Reload translations"
+msgstr "Recharger les traductions"
+
+#. module: aidoo
+msgid "Reload Aidoo translations for every active language? You will need to refresh the page after."
+msgstr "Recharger les traductions Aidoo pour toutes les langues actives ? Vous devrez rafraîchir la page ensuite."
+
+#. module: aidoo
+msgid "Use this if the interface stays in English after a language change."
+msgstr "Utilisez cette action si l'interface reste en anglais après un changement de langue."
 
 #. module: aidoo
 msgid "Paste the connection key generated on your Aidoo dashboard."
