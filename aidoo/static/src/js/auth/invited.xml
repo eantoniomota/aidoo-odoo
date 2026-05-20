@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="aidoo.Invited">
+        <div class="o-aidoo-empty p-3 text-center">
+            <div class="o-aidoo-empty-icon mb-2">
+                <i class="fa fa-envelope-o fa-3x text-muted"/>
+            </div>
+            <h5>You have been invited to Aidoo</h5>
+            <p class="text-muted small">
+                <t t-if="props.email">
+                    Finish your sign-up to connect <strong t-esc="props.email"/>
+                    to this Odoo.
+                </t>
+                <t t-else="">
+                    Finish your sign-up on Aidoo to use this module.
+                </t>
+            </p>
+            <a t-att-href="props.signupUrl || 'https://app.aidoo.fr/register'"
+               target="_blank" rel="noopener"
+               class="btn btn-primary btn-sm">
+                Create my Aidoo account
+            </a>
+        </div>
+    </t>
+
+</templates>
