@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="aidoo.ClaudeTab">
+        <div class="o-aidoo-claude-tab p-1">
+            <p class="small text-muted mb-2">
+                Add Aidoo as a connector in Claude so it can talk to your Odoo.
+                Authentication is automatic (OAuth).
+            </p>
+
+            <div class="mb-2">
+                <label class="form-label small mb-1">MCP URL</label>
+                <div class="d-flex align-items-center gap-2">
+                    <code class="flex-grow-1 bg-light px-2 py-1 rounded small" t-esc="mcpUrl"/>
+                    <button type="button"
+                            class="btn btn-sm btn-light"
+                            t-att-class="{ 'text-success': state.copied }"
+                            t-on-click="copyMcpUrl"
+                            title="Copy MCP URL">
+                        <i class="fa" t-att-class="state.copied ? 'fa-check' : 'fa-copy'"/>
+                    </button>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary btn-sm w-100" t-on-click="openClaudeConnectors">
+                <i class="fa fa-external-link me-1"/>Open Claude connectors
+            </button>
+
+            <p class="text-muted small mt-2 mb-0">
+                Paste the URL above when Claude asks for it. Authentication
+                opens an Aidoo login window — no API key to paste.
+            </p>
+        </div>
+    </t>
+
+</templates>

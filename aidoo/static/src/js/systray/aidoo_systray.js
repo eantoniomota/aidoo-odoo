@@ -16,15 +16,21 @@ export class AidooSystray extends Component {
         this.aidoo = useService("aidoo");
         this.state = useState({
             visible: false,
-            configured: false,
             loading: true,
         });
 
         onWillStart(async () => {
             try {
                 const boot = await this.aidoo.bootstrap();
-                this.state.configured = Boolean(boot && boot.configured);
-                this.state.visible = this.state.configured;
+                if (!boot || !boot.configured) {
+                    this.state.visible = false;
+                    return;
+                }
+                // The icon must stay hidden when no Aidoo account is linked to
+                // this Odoo user (state === "none"), to avoid noise in unrelated
+                // Odoo instances.
+                const me = await this.aidoo.me();
+                this.state.visible = Boolean(me && me.state && me.state !== "none");
             } catch (_err) {
                 this.state.visible = false;
             } finally {

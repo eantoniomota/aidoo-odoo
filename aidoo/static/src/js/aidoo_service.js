@@ -52,9 +52,6 @@ export const aidooService = {
             runWorkflow(workflowId, variables) {
                 return rpc(`/aidoo/proxy/workflows/${workflowId}/run`, { variables });
             },
-            register(payload) {
-                return rpc("/aidoo/register", payload);
-            },
             disconnect() {
                 invalidate();
                 return rpc("/aidoo/disconnect", {});

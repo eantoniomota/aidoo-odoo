@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="aidoo.NoClaude">
+        <div class="o-aidoo-empty p-3 text-center">
+            <div class="o-aidoo-empty-icon mb-2">
+                <i class="fa fa-plug fa-3x text-muted"/>
+            </div>
+            <h5>Connect Aidoo to Claude</h5>
+            <p class="text-muted small">
+                Your Aidoo workspace is ready. To start using AI workflows,
+                add Aidoo as a connector in Claude.
+            </p>
+            <button type="button" class="btn btn-primary btn-sm" t-on-click="connectClaude">
+                <t t-if="state.copied">
+                    <i class="fa fa-check me-1"/>Opening Claude…
+                </t>
+                <t t-else="">
+                    <i class="fa fa-external-link me-1"/>Connect to Claude
+                </t>
+            </button>
+            <p class="text-muted small mt-2">
+                We will copy the MCP URL
+                (<code class="small">https://mcp.aidoo.fr/mcp</code>)
+                to your clipboard.
+            </p>
+        </div>
+    </t>
+
+</templates>

@@ -2,14 +2,12 @@
 
 import { Component, useState, onWillStart } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
-import { AidooNotConnected } from "../auth/not_connected";
+import { AidooInvited } from "../auth/invited";
+import { AidooNoClaude } from "../auth/no_claude";
 import { ExecutionsTab } from "./executions_tab";
 import { WorkflowsTab } from "./workflows_tab";
+import { ClaudeTab } from "./claude_tab";
 
-/**
- * Read the active model / id from the currently displayed Odoo controller.
- * Returns { model: string | null, resId: number | null }.
- */
 function readActiveContext(env) {
     try {
         const controller = env.services.action?.currentController;
@@ -30,7 +28,13 @@ function readActiveContext(env) {
 
 export class AidooPanel extends Component {
     static template = "aidoo.Panel";
-    static components = { AidooNotConnected, ExecutionsTab, WorkflowsTab };
+    static components = {
+        AidooInvited,
+        AidooNoClaude,
+        ExecutionsTab,
+        WorkflowsTab,
+        ClaudeTab,
+    };
     static props = {};
 
     setup() {
@@ -38,19 +42,17 @@ export class AidooPanel extends Component {
         this.state = useState({
             tab: "executions",
             loading: true,
-            mapped: false,
-            user: null,
+            // server-driven state
+            resolved: null, // { state, environment, user?, signupUrl?, mcpUrl }
             context: { model: null, resId: null },
         });
 
         onWillStart(async () => {
             this.state.context = readActiveContext(this.env);
             try {
-                const me = await this.aidoo.me();
-                this.state.mapped = Boolean(me && me.mapped);
-                this.state.user = me?.user || null;
+                this.state.resolved = await this.aidoo.me();
             } catch (_err) {
-                this.state.mapped = false;
+                this.state.resolved = { state: "none" };
             } finally {
                 this.state.loading = false;
             }
@@ -59,5 +61,13 @@ export class AidooPanel extends Component {
 
     selectTab(tab) {
         this.state.tab = tab;
+    }
+
+    get currentState() {
+        return this.state.resolved?.state || "none";
+    }
+
+    get email() {
+        return this.aidoo.email;
     }
 }
