@@ -29,17 +29,9 @@ msgid "Aidoo API base URL"
 msgstr "URL de base de l'API Aidoo"
 
 #. module: aidoo
-msgid "Instance slug"
-msgstr "Identifiant d'instance"
-
-#. module: aidoo
-msgid "Instance name"
-msgstr "Nom de l'instance"
-
-#. module: aidoo
 msgid "API key"
 msgstr "Clé API"
 
 #. module: aidoo
-msgid "Provide the instance slug before saving the API key. Get it on app.aidoo.fr → Settings → Odoo module."
-msgstr "Veuillez renseigner l'identifiant d'instance avant d'enregistrer la clé API. Récupérez-le sur app.aidoo.fr → Paramètres → Module Odoo."
+msgid "The API key must start with 'aid_odoo_'. Generate one on app.aidoo.fr → Settings → Odoo module."
+msgstr "La clé API doit commencer par « aid_odoo_ ». Générez-en une sur app.aidoo.fr → Paramètres → Module Odoo."

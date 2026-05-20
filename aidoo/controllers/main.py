@@ -28,13 +28,12 @@ class AidooController(http.Controller):
         Settings = request.env["res.config.settings"].sudo()
         return {
             "base_url": Settings.aidoo_get_api_base_url(),
-            "slug": Settings.aidoo_get_slug(),
             "api_key": Settings.aidoo_get_api_key(),
         }
 
     def _ensure_connected(self):
         cfg = self._aidoo_settings()
-        if not cfg["slug"] or not cfg["api_key"]:
+        if not cfg["api_key"]:
             return None
         return cfg
 
@@ -43,7 +42,7 @@ class AidooController(http.Controller):
         if cfg is None:
             return {"error": "not_configured", "status": 412}
 
-        url = f"{cfg['base_url']}/v1/odoo/{cfg['slug']}{path}"
+        url = f"{cfg['base_url']}/v1/odoo{path}"
         if params:
             url = f"{url}?{urlparse.urlencode({k: v for k, v in params.items() if v is not None})}"
 
@@ -77,73 +76,9 @@ class AidooController(http.Controller):
         user = request.env.user
         return (user.login or user.email or "").strip().lower()
 
-    def _active_context(self, payload):
-        if not payload:
-            return {}
-        return {
-            "model": payload.get("model"),
-            "resId": payload.get("res_id") or payload.get("resId"),
-        }
-
     # ------------------------------------------------------------------
-    # Registration (admin)
+    # Disconnect (admin only)
     # ------------------------------------------------------------------
-
-    @http.route("/aidoo/register", type="json", auth="user")
-    def register(self, name=None, odoo_database=None, **_kw):
-        if not request.env.user.has_group("aidoo.group_aidoo_admin"):
-            return {"error": "forbidden", "status": 403}
-
-        Settings = request.env["res.config.settings"].sudo()
-        base_url = Settings.aidoo_get_api_base_url()
-        odoo_url = request.httprequest.host_url.rstrip("/")
-        payload = {
-            "odooUrl": odoo_url,
-            "odooDatabase": odoo_database or request.env.cr.dbname,
-            "name": name or (request.env.user.company_id.name or "Odoo"),
-        }
-        # NOTE: registration of a new instance is done by the user's Aidoo
-        # account (JWT), not by an instance key — that's the bootstrap step.
-        # The OWL settings page POSTs the user's Aidoo JWT here in `aidoo_jwt`.
-        aidoo_jwt = _kw.get("aidoo_jwt")
-        if not aidoo_jwt:
-            return {"error": "missing_aidoo_jwt", "status": 400}
-
-        company_id = _kw.get("aidoo_company_id")
-        if not company_id:
-            return {"error": "missing_aidoo_company_id", "status": 400}
-
-        url = f"{base_url.rstrip('/')}/api/companies/{company_id}/odoo-instances"
-        data = json.dumps(payload).encode("utf-8")
-        req = urlrequest.Request(
-            url=url,
-            data=data,
-            method="POST",
-            headers={
-                "Authorization": f"Bearer {aidoo_jwt}",
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-        )
-        try:
-            with urlrequest.urlopen(req, timeout=DEFAULT_TIMEOUT) as resp:
-                result = json.loads(resp.read().decode("utf-8") or "{}")
-        except HTTPError as e:
-            try:
-                body = e.read().decode("utf-8")
-                return {"error": json.loads(body).get("error", str(e)), "status": e.code}
-            except Exception:
-                return {"error": str(e), "status": e.code}
-        except URLError as e:
-            return {"error": "unreachable", "status": 503, "details": str(e)}
-
-        slug = result.get("slug")
-        api_key = result.get("apiKey")
-        if not slug or not api_key:
-            return {"error": "invalid_response", "status": 502}
-
-        Settings.aidoo_store_credentials(slug, api_key, payload["name"])
-        return {"slug": slug, "name": payload["name"]}
 
     @http.route("/aidoo/disconnect", type="json", auth="user")
     def disconnect(self, **_kw):
@@ -206,7 +141,6 @@ class AidooController(http.Controller):
     def bootstrap(self, **_kw):
         cfg = self._aidoo_settings()
         return {
-            "configured": bool(cfg["slug"] and cfg["api_key"]),
+            "configured": bool(cfg["api_key"]),
             "base_url": cfg["base_url"],
-            "slug": cfg["slug"] or None,
         }
