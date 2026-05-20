@@ -197,6 +197,10 @@ msgid "Use this if the interface stays in English after a language change."
 msgstr "Use esta acción si la interfaz sigue en inglés después de cambiar el idioma."
 
 #. module: aidoo
+msgid "Translations reloaded. Refresh the page to see them applied."
+msgstr "Traducciones recargadas. Actualice la página para ver el resultado."
+
+#. module: aidoo
 msgid "Paste the connection key generated on your Aidoo dashboard."
 msgstr "Pegue la clave de conexión generada en su panel de Aidoo."
 

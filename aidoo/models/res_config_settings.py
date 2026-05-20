@@ -29,8 +29,7 @@ class ResConfigSettings(models.TransientModel):
     aidoo_user_lang = fields.Selection(
         string="Interface language",
         selection="_aidoo_get_lang_selection",
-        compute="_compute_aidoo_user_lang",
-        inverse="_inverse_aidoo_user_lang",
+        default=lambda self: self.env.user.lang,
         help=(
             "Language used for the Aidoo systray and panels. Changing it "
             "updates your Odoo language preference."
@@ -53,17 +52,13 @@ class ResConfigSettings(models.TransientModel):
         langs = self.env["res.lang"].search([("active", "=", True)])
         return [(l.code, l.name) for l in langs]
 
-    @api.depends_context("uid")
-    def _compute_aidoo_user_lang(self):
-        for rec in self:
-            rec.aidoo_user_lang = self.env.user.lang
-
-    def _inverse_aidoo_user_lang(self):
-        for rec in self:
-            if rec.aidoo_user_lang and rec.aidoo_user_lang != self.env.user.lang:
-                # Apply to the current user only — Aidoo never silently
-                # changes the language of other users.
-                self.env.user.sudo().lang = rec.aidoo_user_lang
+    @api.model
+    def get_values(self):
+        # Hook into Odoo's TransientModel mechanic so the language picker
+        # always opens on the current user's actual language.
+        res = super().get_values()
+        res["aidoo_user_lang"] = self.env.user.lang
+        return res
 
     # ------------------------------------------------------------------
     # Helpers consumed by controllers/tests
@@ -111,6 +106,16 @@ class ResConfigSettings(models.TransientModel):
                 self.aidoo_store_api_key(key)
                 rec.aidoo_manual_api_key = False
 
+            # Apply the language change to the current Odoo user. Refresh of
+            # the page is needed for the change to be visible everywhere.
+            if rec.aidoo_user_lang and rec.aidoo_user_lang != self.env.user.lang:
+                self.env.user.sudo().lang = rec.aidoo_user_lang
+                # Make sure the aidoo .po for that language is loaded —
+                # otherwise the panel falls back to English even though the
+                # user just selected French.
+                from .. import _reload_aidoo_translations
+                _reload_aidoo_translations(self.env)
+
     # ------------------------------------------------------------------
     # Disconnect button
     # ------------------------------------------------------------------
@@ -134,5 +139,11 @@ class ResConfigSettings(models.TransientModel):
         _reload_aidoo_translations(self.env)
         return {
             "type": "ir.actions.client",
-            "tag": "reload",
+            "tag": "display_notification",
+            "params": {
+                "title": _("Aidoo"),
+                "message": _("Translations reloaded. Refresh the page to see them applied."),
+                "type": "success",
+                "sticky": False,
+            },
         }
