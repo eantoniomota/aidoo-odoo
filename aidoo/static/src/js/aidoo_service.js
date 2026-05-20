@@ -2,19 +2,20 @@
 
 import { registry } from "@web/core/registry";
 import { rpc } from "@web/core/network/rpc";
+import { user } from "@web/core/user";
 
 /**
  * Aidoo service — thin client to the BFF controllers exposed by this module.
  * Caches the bootstrap and the "me" lookup so the systray dropdown opens fast.
  */
 export const aidooService = {
-    dependencies: ["user"],
+    dependencies: [],
 
-    async start(env, { user }) {
+    async start(_env) {
         const state = {
             bootstrap: null,
             me: null,
-            email: user.email || user.login || "",
+            email: user.login || user.email || "",
         };
 
         async function bootstrap() {

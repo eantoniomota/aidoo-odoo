@@ -9,8 +9,8 @@ workflows, exécutions and AI-driven actions without leaving Odoo.
 
 | Branch | Odoo version |
 |--------|--------------|
-| `17.0` | Odoo 17 (current default) |
-| `18.0` | Odoo 18 |
+| `17.0` | Odoo 17 |
+| `18.0` | Odoo 18 (this branch) |
 | `19.0` | Odoo 19 |
 
 ## Features
