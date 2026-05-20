@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="aidoo.WorkflowsTab">
+        <div class="o-aidoo-workflows">
+            <t t-if="state.loading">
+                <div class="text-center text-muted p-3">
+                    <i class="fa fa-circle-o-notch fa-spin"/> Loading workflows…
+                </div>
+            </t>
+            <t t-elif="state.error">
+                <div class="alert alert-warning small" t-esc="state.error"/>
+            </t>
+            <t t-elif="state.selectedId">
+                <WorkflowForm
+                    workflow="selectedWorkflow"
+                    context="props.context"
+                    onClose="() => this.closeForm()"/>
+            </t>
+            <t t-else="">
+                <t t-if="compatible.length">
+                    <div class="small text-muted px-1 mt-1 mb-1">
+                        Suggested for this record
+                    </div>
+                    <ul class="list-group list-group-flush mb-2">
+                        <t t-foreach="compatible" t-as="wf" t-key="wf.id">
+                            <li class="list-group-item list-group-item-action px-2 py-2 o-aidoo-clickable"
+                                t-on-click="() => this.select(wf.id)">
+                                <div class="fw-bold small" t-esc="wf.name"/>
+                                <div class="text-muted small" t-esc="wf.description"/>
+                            </li>
+                        </t>
+                    </ul>
+                </t>
+
+                <t t-if="others.length">
+                    <div class="small text-muted px-1 mt-1 mb-1">
+                        All workflows
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <t t-foreach="others" t-as="wf" t-key="wf.id">
+                            <li class="list-group-item list-group-item-action px-2 py-2 o-aidoo-clickable"
+                                t-on-click="() => this.select(wf.id)">
+                                <div class="fw-bold small" t-esc="wf.name"/>
+                                <div class="text-muted small" t-esc="wf.description"/>
+                            </li>
+                        </t>
+                    </ul>
+                </t>
+
+                <t t-if="!compatible.length and !others.length">
+                    <div class="text-muted text-center p-3 small">
+                        No workflows available.
+                    </div>
+                </t>
+            </t>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,55 @@
+{
+    "name": "Aidoo",
+    "version": "17.0.1.0.0",
+    "summary": "Bring the Aidoo AI assistant inside Odoo: workflows, executions and contextual actions.",
+    "description": """
+Aidoo — AI assistant for Odoo
+=============================
+
+This module connects Odoo to the Aidoo platform (https://aidoo.fr) and adds an
+Aidoo button in the Odoo systray.
+
+Features:
+- Recent executions for the connected user.
+- Launch Aidoo workflows from Odoo with a dynamic variable form.
+- Context-aware: compatible workflows are highlighted on the current record.
+- Secure: API key encrypted with AES-256-GCM, scoped per Odoo instance.
+
+Requires an Aidoo account at https://app.aidoo.fr.
+""",
+    "author": "PLANOR",
+    "website": "https://aidoo.fr",
+    "license": "LGPL-3",
+    "category": "Productivity",
+    "depends": ["base", "web"],
+    "external_dependencies": {
+        "python": ["cryptography"],
+    },
+    "data": [
+        "security/aidoo_security.xml",
+        "security/ir.model.access.csv",
+        "data/ir_config_parameter.xml",
+        "views/res_config_settings_views.xml",
+    ],
+    "assets": {
+        "web.assets_backend": [
+            "aidoo/static/src/scss/aidoo.scss",
+            "aidoo/static/src/js/aidoo_service.js",
+            "aidoo/static/src/js/systray/aidoo_systray.js",
+            "aidoo/static/src/js/systray/aidoo_systray.xml",
+            "aidoo/static/src/js/panel/aidoo_panel.js",
+            "aidoo/static/src/js/panel/aidoo_panel.xml",
+            "aidoo/static/src/js/panel/executions_tab.js",
+            "aidoo/static/src/js/panel/executions_tab.xml",
+            "aidoo/static/src/js/panel/workflows_tab.js",
+            "aidoo/static/src/js/panel/workflows_tab.xml",
+            "aidoo/static/src/js/panel/workflow_form.js",
+            "aidoo/static/src/js/panel/workflow_form.xml",
+            "aidoo/static/src/js/auth/not_connected.js",
+            "aidoo/static/src/js/auth/not_connected.xml",
+        ],
+    },
+    "images": ["static/description/banner.png"],
+    "installable": True,
+    "application": False,
+}

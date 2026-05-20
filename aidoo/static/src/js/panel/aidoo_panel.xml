@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="aidoo.Panel">
+        <div class="o-aidoo-panel" style="min-width: 360px; max-width: 480px;">
+
+            <t t-if="state.loading">
+                <div class="p-4 text-center text-muted">
+                    <i class="fa fa-circle-o-notch fa-spin"/> Loading…
+                </div>
+            </t>
+
+            <t t-elif="!state.mapped">
+                <AidooNotConnected email="aidoo.email"/>
+            </t>
+
+            <t t-else="">
+                <div class="o-aidoo-header p-2 d-flex align-items-center border-bottom">
+                    <span class="o-aidoo-logo me-2" aria-hidden="true"/>
+                    <span class="fw-bold flex-grow-1">Aidoo</span>
+                    <small class="text-muted" t-esc="state.user.firstName + ' ' + state.user.lastName"/>
+                </div>
+
+                <ul class="nav nav-tabs px-2 pt-2" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link"
+                                t-att-class="{ 'active': state.tab === 'executions' }"
+                                t-on-click="() => this.selectTab('executions')">
+                            Executions
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link"
+                                t-att-class="{ 'active': state.tab === 'workflows' }"
+                                t-on-click="() => this.selectTab('workflows')">
+                            Workflows
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="o-aidoo-tab-content p-2">
+                    <t t-if="state.tab === 'executions'">
+                        <ExecutionsTab context="state.context"/>
+                    </t>
+                    <t t-elif="state.tab === 'workflows'">
+                        <WorkflowsTab context="state.context"/>
+                    </t>
+                </div>
+            </t>
+        </div>
+    </t>
+
+</templates>

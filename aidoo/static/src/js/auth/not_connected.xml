@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="aidoo.NotConnected">
+        <div class="o-aidoo-empty p-3 text-center">
+            <div class="o-aidoo-empty-icon mb-2">
+                <i class="fa fa-user-circle-o fa-3x text-muted"/>
+            </div>
+            <h5>Not connected to Aidoo</h5>
+            <p class="text-muted small">
+                Your Odoo account
+                <t t-if="props.email">(<strong t-esc="props.email"/>)</t>
+                does not match any member of this Aidoo workspace.
+            </p>
+            <a href="https://app.aidoo.fr" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                Open Aidoo
+            </a>
+        </div>
+    </t>
+
+</templates>

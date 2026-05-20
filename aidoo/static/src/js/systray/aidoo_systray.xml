@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="aidoo.Systray">
+        <t t-if="state.visible">
+            <Dropdown menuClass="'o-aidoo-dropdown'">
+                <button class="o_nav_entry o-aidoo-trigger" t-att-title="'Aidoo'">
+                    <span class="o-aidoo-logo" aria-hidden="true"/>
+                    <span class="o-aidoo-label d-none d-md-inline">Aidoo</span>
+                </button>
+                <t t-set-slot="content">
+                    <AidooPanel/>
+                </t>
+            </Dropdown>
+        </t>
+    </t>
+
+</templates>

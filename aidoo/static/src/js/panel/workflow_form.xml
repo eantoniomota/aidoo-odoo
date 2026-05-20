@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="aidoo.WorkflowForm">
+        <div class="o-aidoo-workflow-form">
+            <div class="d-flex align-items-center mb-2">
+                <button class="btn btn-sm btn-link p-0 me-2" t-on-click="props.onClose">
+                    <i class="fa fa-arrow-left"/>
+                </button>
+                <span class="fw-bold flex-grow-1" t-esc="props.workflow.name"/>
+            </div>
+
+            <t t-if="state.loading">
+                <div class="text-center text-muted p-2">
+                    <i class="fa fa-circle-o-notch fa-spin"/>
+                </div>
+            </t>
+            <t t-elif="state.error">
+                <div class="alert alert-warning small" t-esc="state.error"/>
+            </t>
+            <t t-elif="state.result">
+                <div class="alert alert-success small">
+                    Workflow accepted.<br/>
+                    <small class="text-muted">Open Aidoo to see the live execution.</small>
+                </div>
+                <button class="btn btn-sm btn-secondary" t-on-click="props.onClose">Done</button>
+            </t>
+            <t t-else="">
+                <form t-on-submit="submit">
+                    <t t-foreach="propertyEntries()" t-as="entry" t-key="entry.key">
+                        <div class="mb-2">
+                            <label class="form-label small mb-0" t-att-for="'aidoo-field-' + entry.key">
+                                <t t-esc="entry.def.title || entry.key"/>
+                                <t t-if="entry.required"><span class="text-danger">*</span></t>
+                            </label>
+                            <t t-if="entry.def.type === 'boolean'">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox"
+                                           t-att-id="'aidoo-field-' + entry.key"
+                                           t-att-checked="state.values[entry.key]"
+                                           t-on-change="(ev) => this.onChange(entry.key, ev)"/>
+                                </div>
+                            </t>
+                            <t t-elif="entry.def.type === 'number'">
+                                <input class="form-control form-control-sm" type="number"
+                                       t-att-id="'aidoo-field-' + entry.key"
+                                       t-att-value="state.values[entry.key]"
+                                       t-att-required="entry.required"
+                                       t-on-input="(ev) => this.onChange(entry.key, ev)"/>
+                            </t>
+                            <t t-elif="entry.def.format === 'date'">
+                                <input class="form-control form-control-sm" type="date"
+                                       t-att-id="'aidoo-field-' + entry.key"
+                                       t-att-value="state.values[entry.key]"
+                                       t-att-required="entry.required"
+                                       t-on-input="(ev) => this.onChange(entry.key, ev)"/>
+                            </t>
+                            <t t-else="">
+                                <input class="form-control form-control-sm" type="text"
+                                       t-att-id="'aidoo-field-' + entry.key"
+                                       t-att-value="state.values[entry.key]"
+                                       t-att-required="entry.required"
+                                       t-on-input="(ev) => this.onChange(entry.key, ev)"/>
+                            </t>
+                        </div>
+                    </t>
+                    <div class="d-flex">
+                        <button type="submit" class="btn btn-primary btn-sm" t-att-disabled="state.running">
+                            <t t-if="state.running"><i class="fa fa-circle-o-notch fa-spin me-1"/></t>
+                            Run workflow
+                        </button>
+                        <button type="button" class="btn btn-link btn-sm ms-2" t-on-click="props.onClose">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </t>
+        </div>
+    </t>
+
+</templates>

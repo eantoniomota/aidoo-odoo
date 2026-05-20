@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="aidoo.ExecutionsTab">
+        <div class="o-aidoo-executions">
+            <t t-if="state.loading">
+                <div class="text-center text-muted p-3">
+                    <i class="fa fa-circle-o-notch fa-spin"/> Loading executions…
+                </div>
+            </t>
+            <t t-elif="state.error">
+                <div class="alert alert-warning small" t-esc="state.error"/>
+            </t>
+            <t t-elif="state.executions.length === 0">
+                <div class="text-muted text-center p-3 small">
+                    No recent executions.
+                </div>
+            </t>
+            <t t-else="">
+                <ul class="list-group list-group-flush">
+                    <t t-foreach="state.executions" t-as="exec" t-key="exec._id">
+                        <li class="list-group-item px-2 py-2"
+                            t-att-class="{ 'o-aidoo-contextual': isContextual(exec) }">
+                            <div class="d-flex">
+                                <div class="flex-grow-1">
+                                    <div class="fw-bold small" t-esc="exec.name || 'Untitled'"/>
+                                    <div class="text-muted small" t-esc="formatDate(exec.createdAt)"/>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge"
+                                          t-att-class="{
+                                              'text-bg-success': exec.status === 'completed',
+                                              'text-bg-danger': exec.status === 'error',
+                                              'text-bg-secondary': exec.status === 'draft',
+                                              'text-bg-info': exec.status === 'running',
+                                          }"
+                                          t-esc="exec.status"/>
+                                    <t t-if="isContextual(exec)">
+                                        <span class="badge text-bg-primary ms-1" title="Linked to current record">●</span>
+                                    </t>
+                                </div>
+                            </div>
+                        </li>
+                    </t>
+                </ul>
+            </t>
+        </div>
+    </t>
+
+</templates>

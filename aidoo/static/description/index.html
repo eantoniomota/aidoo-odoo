@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Aidoo for Odoo</title>
+</head>
+<body>
+    <section style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 960px; margin: 0 auto; padding: 32px;">
+        <h1 style="color:#0d6efd;">Aidoo for Odoo</h1>
+        <p style="font-size: 1.1rem;">
+            Bring the <strong>Aidoo AI assistant</strong> inside Odoo. Run AI workflows,
+            see recent executions, and act on the current record — all from a single
+            button in the Odoo systray.
+        </p>
+
+        <h2>Features</h2>
+        <ul>
+            <li><strong>Systray icon</strong> — discreet Aidoo button at the top right of every Odoo page.</li>
+            <li><strong>Recent executions</strong> — see what your AI assistant did, prioritising the current record.</li>
+            <li><strong>Run workflows</strong> — launch Aidoo workflows with a dynamic form for variables.</li>
+            <li><strong>Context-aware</strong> — workflows compatible with the current model are highlighted.</li>
+            <li><strong>Secure</strong> — API key encrypted with Fernet (AES-128-CBC + HMAC) and bound to your Odoo database secret.</li>
+            <li><strong>Multi-version</strong> — separate branches for Odoo 17, 18 and 19.</li>
+        </ul>
+
+        <h2>Setup</h2>
+        <ol>
+            <li>Install the Aidoo module from the Apps menu.</li>
+            <li>Go to <em>Settings → General Settings → Aidoo</em> and connect to your Aidoo workspace.</li>
+            <li>Users that already exist in your Aidoo workspace (matched by email) immediately see the systray icon.</li>
+        </ol>
+
+        <h2>Requires</h2>
+        <p>
+            An Aidoo account at <a href="https://app.aidoo.fr">app.aidoo.fr</a>.<br/>
+            Python dependency: <code>cryptography</code>.
+        </p>
+    </section>
+</body>
+</html>

@@ -1,0 +1,45 @@
+# Spanish translation for Aidoo module.
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-05-20 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: aidoo
+msgid "Aidoo"
+msgstr "Aidoo"
+
+#. module: aidoo
+msgid "User"
+msgstr "Usuario"
+
+#. module: aidoo
+msgid "Administrator"
+msgstr "Administrador"
+
+#. module: aidoo
+msgid "Aidoo API base URL"
+msgstr "URL base de la API de Aidoo"
+
+#. module: aidoo
+msgid "Instance slug"
+msgstr "Identificador de instancia"
+
+#. module: aidoo
+msgid "Instance name"
+msgstr "Nombre de la instancia"
+
+#. module: aidoo
+msgid "API key"
+msgstr "Clave API"
+
+#. module: aidoo
+msgid "Provide the instance slug before saving the API key. Use 'Connect to Aidoo' to obtain a slug automatically."
+msgstr "Proporcione el identificador de instancia antes de guardar la clave API. Use «Conectar a Aidoo» para obtenerlo automáticamente."
