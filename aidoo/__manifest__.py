@@ -1,6 +1,6 @@
 {
     "name": "Aidoo",
-    "version": "17.0.1.0.2",
+    "version": "17.0.1.0.3",
     "summary": "Bring the Aidoo AI assistant inside Odoo: workflows, executions and contextual actions.",
     "description": """
 Aidoo — AI assistant for Odoo
@@ -34,7 +34,7 @@ Requires an Aidoo account at https://app.aidoo.fr.
     "assets": {
         "web.assets_backend": [
             "aidoo/static/src/scss/aidoo.scss",
-            "aidoo/static/src/i18n/translations.js",
+            "aidoo/static/src/js/i18n/translations.js",
             "aidoo/static/src/js/aidoo_service.js",
             "aidoo/static/src/js/systray/aidoo_systray.js",
             "aidoo/static/src/js/systray/aidoo_systray.xml",
