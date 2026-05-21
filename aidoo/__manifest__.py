@@ -1,6 +1,6 @@
 {
     "name": "Aidoo",
-    "version": "17.0.1.0.15",
+    "version": "17.0.1.0.16",
     "summary": "Bring the Aidoo AI assistant inside Odoo: workflows, executions and contextual actions.",
     "description": """
 Aidoo — AI assistant for Odoo
