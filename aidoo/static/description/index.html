@@ -116,12 +116,41 @@
 <section class="oe_container oe_dark">
     <div class="oe_row oe_spaced">
         <h2 class="oe_slogan">Privacy &amp; data</h2>
-        <p style="font-size: 1.1rem; text-align:center;">
-            The module never sends Odoo data to a third party on its own. It only
-            calls the Aidoo backend you registered, using a key encrypted on disk
-            with your Odoo <code>database.secret</code>. A user can only see the
-            Aidoo panel if their Odoo email matches an Aidoo workspace member of
-            your own organisation — strict per-company scoping.
+        <p style="font-size: 1.1rem;">
+            <strong>What the module sends out of your Odoo:</strong>
+        </p>
+        <ul style="font-size: 1.05rem; line-height: 1.8;">
+            <li>The Odoo login (email) of the current user — sent to your Aidoo
+                workspace to identify who is calling.</li>
+            <li>When you open the panel on a record: the technical model name
+                (e.g. <code>sale.order</code>) and the record ID — used to
+                highlight workflows compatible with that record and to
+                surface related executions.</li>
+            <li>When you launch a workflow: the variables you typed in the
+                dynamic form.</li>
+            <li>No Odoo business data is read or forwarded unless an Aidoo
+                workflow you started explicitly asks for it.</li>
+        </ul>
+        <p style="font-size: 1.1rem;">
+            <strong>Where the data goes:</strong> only to the Aidoo backend
+            URL you configured (default: <code>api.aidoo.fr</code>). The
+            connection key is encrypted on disk with your Odoo
+            <code>database.secret</code> using Fernet (AES-128-CBC + HMAC) —
+            it never reaches the browser.
+        </p>
+        <p style="font-size: 1.1rem;">
+            <strong>Per-company isolation:</strong> a user can only see the
+            Aidoo panel if their Odoo email matches an Aidoo workspace
+            member of your own organisation. No cross-workspace leak is
+            possible — strictly enforced server-side on
+            <code>api.aidoo.fr</code>.
+        </p>
+        <p style="font-size: 1.1rem;">
+            <strong>Third parties:</strong> if you connect Aidoo to Claude
+            (Anthropic), your prompts and any data Claude reads back from
+            Odoo through the MCP connector are also processed by Anthropic.
+            Aidoo's full privacy policy:
+            <a href="https://aidoo.fr/privacy">aidoo.fr/privacy</a>.
         </p>
     </div>
 </section>
