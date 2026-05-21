@@ -52,6 +52,7 @@ export class AidooPanel extends Component {
             tabExecutions: _t("Executions"),
             tabWorkflows: _t("Workflows"),
             tabClaude: _t("Claude"),
+            openClaude: _t("Open Claude"),
         };
 
         onWillStart(async () => {
@@ -68,6 +69,10 @@ export class AidooPanel extends Component {
 
     selectTab(tab) {
         this.state.tab = tab;
+    }
+
+    openClaude() {
+        window.open("https://claude.ai/new", "_blank", "noopener");
     }
 
     get currentState() {

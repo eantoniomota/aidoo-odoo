@@ -23,8 +23,15 @@
                 <div class="o-aidoo-header p-2 d-flex align-items-center border-bottom">
                     <span class="o-aidoo-logo me-2" aria-hidden="true"/>
                     <span class="fw-bold flex-grow-1">Aidoo</span>
-                    <small class="text-muted"
+                    <small class="text-muted me-2"
                            t-esc="state.resolved.user.firstName + ' ' + state.resolved.user.lastName"/>
+                    <button type="button"
+                            class="btn btn-sm btn-primary"
+                            t-on-click="openClaude"
+                            t-att-title="labels.openClaude">
+                        <i class="fa fa-external-link me-1"/>
+                        <span t-esc="labels.openClaude"/>
+                    </button>
                 </div>
 
                 <ul class="nav nav-tabs px-2 pt-2" role="tablist">
