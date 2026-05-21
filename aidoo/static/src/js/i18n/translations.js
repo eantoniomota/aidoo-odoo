@@ -144,15 +144,57 @@ const LANG_ALIASES = {
     es_VE: "es_ES",
 };
 
-function resolveLang() {
-    const raw =
-        (session && session.user_context && session.user_context.lang) ||
-        "en_US";
-    if (TRANSLATIONS[raw]) return raw;
-    if (LANG_ALIASES[raw] && TRANSLATIONS[LANG_ALIASES[raw]]) {
-        return LANG_ALIASES[raw];
+function normalizeLang(raw) {
+    if (!raw) return null;
+    // Browsers often expose "fr-FR" while Odoo uses "fr_FR".
+    const normalized = String(raw).replace("-", "_");
+    if (TRANSLATIONS[normalized]) return normalized;
+    if (LANG_ALIASES[normalized] && TRANSLATIONS[LANG_ALIASES[normalized]]) {
+        return LANG_ALIASES[normalized];
     }
-    return "en_US";
+    // Last chance: try the 2-letter prefix (e.g. "fr-CA" → "fr" → "fr_FR")
+    const prefix = normalized.split("_")[0];
+    if (LANG_ALIASES[prefix] && TRANSLATIONS[LANG_ALIASES[prefix]]) {
+        return LANG_ALIASES[prefix];
+    }
+    return null;
+}
+
+let _cachedLang = null;
+
+function resolveLang() {
+    if (_cachedLang) return _cachedLang;
+
+    // Try several sources in order of authority. session.user_context.lang is
+    // populated by Odoo at HTML render — it should be correct after a hard
+    // refresh, but a partial reload can leave it stale, hence the fallbacks.
+    const candidates = [
+        session && session.user_context && session.user_context.lang,
+        document.documentElement && document.documentElement.lang,
+        document.documentElement &&
+            document.documentElement.getAttribute("lang"),
+        typeof navigator !== "undefined" && navigator.language,
+    ];
+
+    for (const raw of candidates) {
+        const matched = normalizeLang(raw);
+        if (matched) {
+            _cachedLang = matched;
+            // eslint-disable-next-line no-console
+            console.debug(
+                `[aidoo] using language "${matched}" (from "${raw}")`
+            );
+            return matched;
+        }
+    }
+
+    _cachedLang = "en_US";
+    // eslint-disable-next-line no-console
+    console.debug(
+        "[aidoo] no matching translation language, falling back to en_US",
+        { candidates }
+    );
+    return _cachedLang;
 }
 
 /**
