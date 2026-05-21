@@ -22,7 +22,7 @@ class ResConfigSettings(models.TransientModel):
     aidoo_manual_api_key = fields.Char(
         string="API key",
         help=(
-            "Paste the connection key generated on app.aidoo.fr → "
+            "Paste the connection key generated on aidoo.fr → "
             "Settings → Odoo module (format: aid_odoo_…)."
         ),
     )
@@ -101,7 +101,7 @@ class ResConfigSettings(models.TransientModel):
                 if not key.startswith("aid_odoo_"):
                     raise UserError(_(
                         "The API key must start with 'aid_odoo_'. "
-                        "Generate one on app.aidoo.fr → Settings → Odoo module."
+                        "Generate one on aidoo.fr → Settings → Odoo module."
                     ))
                 self.aidoo_store_api_key(key)
                 rec.aidoo_manual_api_key = False

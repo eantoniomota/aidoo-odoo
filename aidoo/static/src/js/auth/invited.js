@@ -20,6 +20,6 @@ export class AidooInvited extends Component {
     }
 
     get signupUrl() {
-        return this.props.signupUrl || "https://app.aidoo.fr/register";
+        return this.props.signupUrl || "https://aidoo.fr/register";
     }
 }
