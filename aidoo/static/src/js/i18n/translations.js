@@ -26,6 +26,7 @@ const TRANSLATIONS = {
         "Executions": "Exécutions",
         "Workflows": "Workflows",
         "Claude": "Claude",
+        "Open Claude": "Ouvrir Claude",
 
         // Invited view
         "You have been invited to Aidoo": "Vous avez été invité sur Aidoo",
@@ -82,6 +83,7 @@ const TRANSLATIONS = {
         "Executions": "Ejecuciones",
         "Workflows": "Flujos de trabajo",
         "Claude": "Claude",
+        "Open Claude": "Abrir Claude",
 
         "You have been invited to Aidoo": "Ha sido invitado a Aidoo",
         "Finish your sign-up to connect this email to Odoo.":
