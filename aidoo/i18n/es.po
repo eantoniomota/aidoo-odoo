@@ -206,10 +206,10 @@ msgstr "Pegue la clave de conexión generada en su panel de Aidoo."
 
 #. module: aidoo
 msgid ""
-"Paste the connection key generated on app.aidoo.fr → Settings → Odoo module "
+"Paste the connection key generated on aidoo.fr → Settings → Odoo module "
 "(format: aid_odoo_…)."
 msgstr ""
-"Pegue la clave de conexión generada en app.aidoo.fr → Ajustes → Módulo "
+"Pegue la clave de conexión generada en aidoo.fr → Ajustes → Módulo "
 "Odoo (formato: aid_odoo_…)."
 
 #. module: aidoo
@@ -222,10 +222,10 @@ msgstr "Sugeridos para este registro"
 
 #. module: aidoo
 msgid ""
-"The API key must start with 'aid_odoo_'. Generate one on app.aidoo.fr → "
+"The API key must start with 'aid_odoo_'. Generate one on aidoo.fr → "
 "Settings → Odoo module."
 msgstr ""
-"La clave API debe comenzar por «aid_odoo_». Genere una en app.aidoo.fr → "
+"La clave API debe comenzar por «aid_odoo_». Genere una en aidoo.fr → "
 "Ajustes → Módulo Odoo."
 
 #. module: aidoo

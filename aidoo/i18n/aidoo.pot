@@ -201,7 +201,7 @@ msgstr ""
 
 #. module: aidoo
 msgid ""
-"Paste the connection key generated on app.aidoo.fr → Settings → Odoo module "
+"Paste the connection key generated on aidoo.fr → Settings → Odoo module "
 "(format: aid_odoo_…)."
 msgstr ""
 
@@ -215,7 +215,7 @@ msgstr ""
 
 #. module: aidoo
 msgid ""
-"The API key must start with 'aid_odoo_'. Generate one on app.aidoo.fr → "
+"The API key must start with 'aid_odoo_'. Generate one on aidoo.fr → "
 "Settings → Odoo module."
 msgstr ""
 
