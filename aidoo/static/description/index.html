@@ -5,36 +5,89 @@
     <title>Aidoo for Odoo</title>
 </head>
 <body>
-    <section style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 960px; margin: 0 auto; padding: 32px;">
-        <h1 style="color:#0d6efd;">Aidoo for Odoo</h1>
-        <p style="font-size: 1.1rem;">
-            Bring the <strong>Aidoo AI assistant</strong> inside Odoo. Run AI workflows,
-            see recent executions, and act on the current record — all from a single
-            button in the Odoo systray.
-        </p>
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#0d6efd;">Aidoo — your AI assistant inside Odoo</h2>
+        <h3 class="oe_slogan">Run AI workflows, see your assistant's history and connect Claude — all from a single button in the Odoo systray.</h3>
+    </div>
+</section>
 
-        <h2>Features</h2>
-        <ul>
-            <li><strong>Systray icon</strong> — discreet Aidoo button at the top right of every Odoo page.</li>
-            <li><strong>Recent executions</strong> — see what your AI assistant did, prioritising the current record.</li>
-            <li><strong>Run workflows</strong> — launch Aidoo workflows with a dynamic form for variables.</li>
-            <li><strong>Context-aware</strong> — workflows compatible with the current model are highlighted.</li>
-            <li><strong>Secure</strong> — API key encrypted with Fernet (AES-128-CBC + HMAC) and bound to your Odoo database secret.</li>
-            <li><strong>Multi-version</strong> — separate branches for Odoo 17, 18 and 19.</li>
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">What it does</h2>
+        <div class="oe_span6">
+            <h3 class="oe_slogan">Aidoo button in the systray</h3>
+            <p class="oe_mt32">
+                A discreet Aidoo icon appears at the top right of every Odoo page —
+                only for users whose email is linked to your Aidoo workspace.
+                One click opens the panel.
+            </p>
+        </div>
+        <div class="oe_span6">
+            <h3 class="oe_slogan">Context-aware</h3>
+            <p class="oe_mt32">
+                Open the Aidoo panel from a sales order, an invoice or a contact and
+                see the workflows compatible with that record highlighted, plus the
+                last AI executions linked to it.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">Features</h2>
+        <ul style="font-size: 1.1rem; line-height: 1.8;">
+            <li><strong>Recent executions</strong> — see what your AI assistant ran for you, prioritising the current record.</li>
+            <li><strong>Run workflows</strong> — launch Aidoo workflows from Odoo with a dynamic form generated from each workflow's variables.</li>
+            <li><strong>One-click Claude</strong> — open Claude.ai from the panel and start a new chat connected to your Odoo.</li>
+            <li><strong>Custom-connector helper</strong> — when Claude is not yet connected, the panel shows the Name and the MCP URL with copy buttons.</li>
+            <li><strong>Multi-environment</strong> — separate connection keys for Production and Pre-production.</li>
+            <li><strong>Secure</strong> — connection key encrypted with Fernet (AES-128-CBC + HMAC) and bound to your Odoo <code>database.secret</code>.</li>
+            <li><strong>Multi-language</strong> — UI ships with French, Spanish and English. Pick the language from <em>Settings → Aidoo</em>.</li>
         </ul>
+    </div>
+</section>
 
-        <h2>Setup</h2>
-        <ol>
-            <li>Install the Aidoo module from the Apps menu.</li>
-            <li>Go to <em>Settings → General Settings → Aidoo</em> and connect to your Aidoo workspace.</li>
-            <li>Users that already exist in your Aidoo workspace (matched by email) immediately see the systray icon.</li>
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">Setup</h2>
+        <ol style="font-size: 1.1rem; line-height: 1.8;">
+            <li>Install the <strong>Aidoo</strong> module from the Apps menu.</li>
+            <li>Create your Aidoo account at <a href="https://app.aidoo.fr">app.aidoo.fr</a> (free trial).</li>
+            <li>On the Aidoo dashboard, go to <em>Settings → Odoo module</em> and generate a connection key for Production (or Pre-production).</li>
+            <li>In Odoo, open <em>Settings → Aidoo</em>, paste the key and save.</li>
+            <li>Click the Aidoo icon in the systray — you are connected.</li>
         </ol>
+    </div>
+</section>
 
-        <h2>Requires</h2>
-        <p>
-            An Aidoo account at <a href="https://app.aidoo.fr">app.aidoo.fr</a>.<br/>
-            Python dependency: <code>cryptography</code>.
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">Privacy &amp; data</h2>
+        <p style="font-size: 1.1rem;">
+            The module never sends Odoo data to a third party on its own. It only
+            calls the Aidoo backend you registered, using a key encrypted on disk
+            with your Odoo <code>database.secret</code>. A user can only see the
+            Aidoo panel if their Odoo email matches an Aidoo workspace member of
+            your own organisation — strict per-company scoping.
         </p>
-    </section>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan">Requires</h2>
+        <p style="font-size: 1.1rem;">
+            An Aidoo account at <a href="https://app.aidoo.fr">app.aidoo.fr</a>.<br/>
+            Python dependency installed automatically by Odoo: <code>cryptography</code>.
+        </p>
+        <h2 class="oe_slogan oe_mt32">Support</h2>
+        <p style="font-size: 1.1rem;">
+            Email: <a href="mailto:support@aidoo.fr">support@aidoo.fr</a><br/>
+            Documentation: <a href="https://aidoo.fr">aidoo.fr</a>
+        </p>
+    </div>
+</section>
 </body>
 </html>
