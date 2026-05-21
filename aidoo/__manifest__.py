@@ -1,6 +1,6 @@
 {
     "name": "Aidoo",
-    "version": "18.0.1.0.6",
+    "version": "18.0.1.0.7",
     "summary": "Bring the Aidoo AI assistant inside Odoo: workflows, executions and contextual actions.",
     "description": """
 Aidoo — AI assistant for Odoo
@@ -18,9 +18,11 @@ Features:
 Requires an Aidoo account at https://app.aidoo.fr.
 """,
     "author": "PLANOR",
+    "maintainer": "PLANOR",
+    "support": "support@aidoo.fr",
     "website": "https://aidoo.fr",
     "license": "LGPL-3",
-    "category": "Productivity",
+    "category": "Productivity/AI",
     "depends": ["base", "web"],
     "external_dependencies": {
         "python": ["cryptography"],
@@ -54,7 +56,9 @@ Requires an Aidoo account at https://app.aidoo.fr.
             "aidoo/static/src/js/auth/no_claude.xml",
         ],
     },
-    "images": ["static/description/banner.png"],
+    "images": [
+        "static/description/icon.png",
+    ],
     "installable": True,
     "application": False,
     "post_init_hook": "post_init_hook",
