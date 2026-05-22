@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="aidoo.NoToken">
+        <div class="o-aidoo-empty p-3 text-center">
+            <div class="o-aidoo-empty-icon mb-2">
+                <i class="fa fa-magic fa-3x text-muted"/>
+            </div>
+
+            <t t-if="props.isAdmin">
+                <h5 t-esc="labels.adminTitle"/>
+                <p class="text-muted small" t-esc="labels.adminIntro"/>
+                <button type="button"
+                        class="btn btn-primary btn-sm"
+                        t-on-click="openSettings">
+                    <i class="fa fa-cog me-1"/>
+                    <span t-esc="labels.configureBtn"/>
+                </button>
+                <p class="text-muted small mt-3" t-esc="labels.adminSplit"/>
+                <a t-att-href="signupUrl"
+                   target="_blank" rel="noopener"
+                   class="btn btn-outline-primary btn-sm">
+                    <span t-esc="labels.createCta"/>
+                </a>
+            </t>
+
+            <t t-else="">
+                <h5 t-esc="labels.userTitle"/>
+                <p class="text-muted small" t-esc="labels.userIntro"/>
+                <p class="text-muted small mt-3" t-esc="labels.userOrCreate"/>
+                <a t-att-href="signupUrl"
+                   target="_blank" rel="noopener"
+                   class="btn btn-primary btn-sm">
+                    <span t-esc="labels.createCta"/>
+                </a>
+            </t>
+        </div>
+    </t>
+
+</templates>
