@@ -37,6 +37,7 @@ export class AidooNoToken extends Component {
         await this.action.doAction({
             type: "ir.actions.act_window",
             res_model: "res.config.settings",
+            views: [[false, "form"]],
             view_mode: "form",
             target: "inline",
             context: { module: "aidoo" },
