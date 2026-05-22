@@ -140,7 +140,10 @@ class AidooController(http.Controller):
     @http.route("/aidoo/bootstrap", type="json", auth="user")
     def bootstrap(self, **_kw):
         cfg = self._aidoo_settings()
+        is_admin = request.env.user.has_group("aidoo.group_aidoo_admin")
         return {
             "configured": bool(cfg["api_key"]),
             "base_url": cfg["base_url"],
+            "isAdmin": is_admin,
+            "signupUrl": "https://app.aidoo.fr/register",
         }

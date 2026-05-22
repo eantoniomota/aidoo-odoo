@@ -11,6 +11,10 @@
                 </div>
             </t>
 
+            <t t-elif="currentState === 'no_token'">
+                <AidooNoToken isAdmin="state.boot?.isAdmin" signupUrl="state.boot?.signupUrl"/>
+            </t>
+
             <t t-elif="currentState === 'invited'">
                 <AidooInvited email="email" signupUrl="state.resolved?.signupUrl"/>
             </t>

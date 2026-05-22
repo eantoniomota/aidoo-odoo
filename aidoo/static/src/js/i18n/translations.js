@@ -28,6 +28,18 @@ const TRANSLATIONS = {
         "Claude": "Claude",
         "Open Claude": "Ouvrir Claude",
 
+        // No-token discovery view
+        "Enable Aidoo on this Odoo": "Activer Aidoo sur cet Odoo",
+        "Connect Odoo to Claude in 3 minutes. Already have an Aidoo account?":
+            "Connectez Odoo à Claude en 3 minutes. Vous avez déjà un compte Aidoo ?",
+        "Configure connection": "Configurer la connexion",
+        "New here? Create your Aidoo account:": "Nouveau ? Créez votre compte Aidoo :",
+        "Aidoo is not enabled yet": "Aidoo n'est pas encore activé",
+        "Aidoo brings AI workflows and Claude inside Odoo. Ask your administrator to enable it on this database.":
+            "Aidoo intègre les workflows IA et Claude dans Odoo. Demandez à votre administrateur de l'activer sur cette base.",
+        "Or create your own Aidoo workspace:": "Ou créez votre propre espace Aidoo :",
+        "Create your Aidoo account": "Créer mon compte Aidoo",
+
         // Invited view
         "You have been invited to Aidoo": "Vous avez été invité sur Aidoo",
         "Finish your sign-up to connect this email to Odoo.":
@@ -84,6 +96,20 @@ const TRANSLATIONS = {
         "Workflows": "Flujos de trabajo",
         "Claude": "Claude",
         "Open Claude": "Abrir Claude",
+
+        // No-token discovery
+        "Enable Aidoo on this Odoo": "Active Aidoo en este Odoo",
+        "Connect Odoo to Claude in 3 minutes. Already have an Aidoo account?":
+            "Conecte Odoo a Claude en 3 minutos. ¿Ya tiene una cuenta Aidoo?",
+        "Configure connection": "Configurar conexión",
+        "New here? Create your Aidoo account:":
+            "¿Nuevo? Cree su cuenta Aidoo:",
+        "Aidoo is not enabled yet": "Aidoo aún no está activado",
+        "Aidoo brings AI workflows and Claude inside Odoo. Ask your administrator to enable it on this database.":
+            "Aidoo integra flujos de trabajo de IA y Claude en Odoo. Pida a su administrador que lo active en esta base de datos.",
+        "Or create your own Aidoo workspace:":
+            "O cree su propio espacio Aidoo:",
+        "Create your Aidoo account": "Cree su cuenta Aidoo",
 
         "You have been invited to Aidoo": "Ha sido invitado a Aidoo",
         "Finish your sign-up to connect this email to Odoo.":

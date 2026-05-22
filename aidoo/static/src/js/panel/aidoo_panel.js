@@ -5,6 +5,7 @@ import { useService } from "@web/core/utils/hooks";
 import { t as _t } from "../i18n/translations";
 import { AidooInvited } from "../auth/invited";
 import { AidooNoClaude } from "../auth/no_claude";
+import { AidooNoToken } from "../auth/no_token";
 import { ExecutionsTab } from "./executions_tab";
 import { WorkflowsTab } from "./workflows_tab";
 import { ClaudeTab } from "./claude_tab";
@@ -32,6 +33,7 @@ export class AidooPanel extends Component {
     static components = {
         AidooInvited,
         AidooNoClaude,
+        AidooNoToken,
         ExecutionsTab,
         WorkflowsTab,
         ClaudeTab,
@@ -45,6 +47,7 @@ export class AidooPanel extends Component {
             loading: true,
             // server-driven state
             resolved: null, // { state, environment, user?, signupUrl?, mcpUrl }
+            boot: null,     // { configured, isAdmin, signupUrl }
             context: { model: null, resId: null },
         });
         this.labels = {
@@ -58,7 +61,12 @@ export class AidooPanel extends Component {
         onWillStart(async () => {
             this.state.context = readActiveContext(this.env);
             try {
-                this.state.resolved = await this.aidoo.me();
+                this.state.boot = await this.aidoo.bootstrap();
+                // If Aidoo is configured, resolve the user state.
+                // If not, the panel shows the discovery (NoToken) view, no /me call.
+                if (this.state.boot && this.state.boot.configured) {
+                    this.state.resolved = await this.aidoo.me();
+                }
             } catch (_err) {
                 this.state.resolved = { state: "none" };
             } finally {
@@ -76,6 +84,9 @@ export class AidooPanel extends Component {
     }
 
     get currentState() {
+        if (this.state.boot && this.state.boot.configured === false) {
+            return "no_token";
+        }
         return this.state.resolved?.state || "none";
     }
 
