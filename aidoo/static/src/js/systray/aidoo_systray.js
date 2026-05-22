@@ -22,13 +22,19 @@ export class AidooSystray extends Component {
         onWillStart(async () => {
             try {
                 const boot = await this.aidoo.bootstrap();
-                if (!boot || !boot.configured) {
+                if (!boot) {
                     this.state.visible = false;
                     return;
                 }
-                // The icon must stay hidden when no Aidoo account is linked to
-                // this Odoo user (state === "none"), to avoid noise in unrelated
-                // Odoo instances.
+                if (!boot.configured) {
+                    // No Aidoo token on this Odoo: show the icon to *everyone*
+                    // as a discovery hook. The panel will pitch them an account.
+                    this.state.visible = true;
+                    return;
+                }
+                // Token is configured: keep the existing scoping — hide the
+                // icon when the current Odoo user is not a member of the
+                // linked Aidoo workspace (state === "none").
                 const me = await this.aidoo.me();
                 this.state.visible = Boolean(me && me.state && me.state !== "none");
             } catch (_err) {
