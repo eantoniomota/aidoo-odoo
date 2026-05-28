@@ -60,8 +60,8 @@ const TRANSLATIONS = {
         "Copied to clipboard.": "Copié dans le presse-papiers.",
         "Open Claude connectors": "Ouvrir les connecteurs Claude",
         "Opening Claude…": "Ouverture de Claude…",
-        "The MCP URL (https://mcp.aidoo.fr/mcp) will also be copied to your clipboard when you click the button above.":
-            "L'URL MCP (https://mcp.aidoo.fr/mcp) sera également copiée dans votre presse-papiers lorsque vous cliquerez sur le bouton ci-dessus.",
+        "The MCP URL (https://mcp.aidoo.ai/mcp) will also be copied to your clipboard when you click the button above.":
+            "L'URL MCP (https://mcp.aidoo.ai/mcp) sera également copiée dans votre presse-papiers lorsque vous cliquerez sur le bouton ci-dessus.",
 
         // Executions tab
         "Loading executions…": "Chargement des exécutions…",
@@ -129,8 +129,8 @@ const TRANSLATIONS = {
         "Copied to clipboard.": "Copiado al portapapeles.",
         "Open Claude connectors": "Abrir conectores de Claude",
         "Opening Claude…": "Abriendo Claude…",
-        "The MCP URL (https://mcp.aidoo.fr/mcp) will also be copied to your clipboard when you click the button above.":
-            "La URL MCP (https://mcp.aidoo.fr/mcp) también se copiará a su portapapeles cuando haga clic en el botón anterior.",
+        "The MCP URL (https://mcp.aidoo.ai/mcp) will also be copied to your clipboard when you click the button above.":
+            "La URL MCP (https://mcp.aidoo.ai/mcp) también se copiará a su portapapeles cuando haga clic en el botón anterior.",
 
         "Loading executions…": "Cargando ejecuciones…",
         "No recent executions.": "No hay ejecuciones recientes.",

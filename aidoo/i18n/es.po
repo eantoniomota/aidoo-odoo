@@ -59,8 +59,8 @@ msgstr ""
 "que pegar ninguna clave API."
 
 #. module: aidoo
-msgid "Base URL of the Aidoo API. Defaults to https://api.aidoo.fr."
-msgstr "URL base de la API de Aidoo. Por defecto: https://api.aidoo.fr."
+msgid "Base URL of the Aidoo API. Defaults to https://api.aidoo.ai."
+msgstr "URL base de la API de Aidoo. Por defecto: https://api.aidoo.ai."
 
 #. module: aidoo
 msgid "Cancel"
@@ -206,10 +206,10 @@ msgstr "Pegue la clave de conexión generada en su panel de Aidoo."
 
 #. module: aidoo
 msgid ""
-"Paste the connection key generated on aidoo.fr → Settings → Odoo module "
+"Paste the connection key generated on aidoo.ai → Settings → Odoo module "
 "(format: aid_odoo_…)."
 msgstr ""
-"Pegue la clave de conexión generada en aidoo.fr → Ajustes → Módulo "
+"Pegue la clave de conexión generada en aidoo.ai → Ajustes → Módulo "
 "Odoo (formato: aid_odoo_…)."
 
 #. module: aidoo
@@ -222,18 +222,18 @@ msgstr "Sugeridos para este registro"
 
 #. module: aidoo
 msgid ""
-"The API key must start with 'aid_odoo_'. Generate one on aidoo.fr → "
+"The API key must start with 'aid_odoo_'. Generate one on aidoo.ai → "
 "Settings → Odoo module."
 msgstr ""
-"La clave API debe comenzar por «aid_odoo_». Genere una en aidoo.fr → "
+"La clave API debe comenzar por «aid_odoo_». Genere una en aidoo.ai → "
 "Ajustes → Módulo Odoo."
 
 #. module: aidoo
 msgid ""
-"The MCP URL (https://mcp.aidoo.fr/mcp) will also be copied to your clipboard "
+"The MCP URL (https://mcp.aidoo.ai/mcp) will also be copied to your clipboard "
 "when you click the button above."
 msgstr ""
-"La URL MCP (https://mcp.aidoo.fr/mcp) también se copiará a su portapapeles "
+"La URL MCP (https://mcp.aidoo.ai/mcp) también se copiará a su portapapeles "
 "cuando haga clic en el botón anterior."
 
 #. module: aidoo

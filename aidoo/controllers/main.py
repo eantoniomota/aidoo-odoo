@@ -13,7 +13,7 @@ DEFAULT_TIMEOUT = 15  # seconds
 
 
 class AidooController(http.Controller):
-    """BFF (Backend For Frontend) — relays requests from the OWL panel to api.aidoo.fr.
+    """BFF (Backend For Frontend) — relays requests from the OWL panel to api.aidoo.ai.
 
     The Odoo session cookie authenticates the user. The Aidoo API key is read
     server-side from ``ir.config_parameter`` (decrypted on the fly), so the
@@ -145,5 +145,5 @@ class AidooController(http.Controller):
             "configured": bool(cfg["api_key"]),
             "base_url": cfg["base_url"],
             "isAdmin": is_admin,
-            "signupUrl": "https://app.aidoo.fr/register",
+            "signupUrl": "https://app.aidoo.ai/register",
         }

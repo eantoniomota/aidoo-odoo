@@ -1,6 +1,6 @@
 # Aidoo — Odoo module
 
-Native Odoo integration for [Aidoo](https://aidoo.fr), the AI assistant for Odoo ERP.
+Native Odoo integration for [Aidoo](https://aidoo.ai), the AI assistant for Odoo ERP.
 
 This addon adds a systray button in Odoo that lets users interact with their Aidoo
 workflows, exécutions and AI-driven actions without leaving Odoo.

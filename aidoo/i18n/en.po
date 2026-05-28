@@ -57,8 +57,8 @@ msgid "Authentication opens an Aidoo login window — no API key to paste."
 msgstr "Authentication opens an Aidoo login window — no API key to paste."
 
 #. module: aidoo
-msgid "Base URL of the Aidoo API. Defaults to https://api.aidoo.fr."
-msgstr "Base URL of the Aidoo API. Defaults to https://api.aidoo.fr."
+msgid "Base URL of the Aidoo API. Defaults to https://api.aidoo.ai."
+msgstr "Base URL of the Aidoo API. Defaults to https://api.aidoo.ai."
 
 #. module: aidoo
 msgid "Cancel"
@@ -202,10 +202,10 @@ msgstr "Paste the connection key generated on your Aidoo dashboard."
 
 #. module: aidoo
 msgid ""
-"Paste the connection key generated on aidoo.fr → Settings → Odoo module "
+"Paste the connection key generated on aidoo.ai → Settings → Odoo module "
 "(format: aid_odoo_…)."
 msgstr ""
-"Paste the connection key generated on aidoo.fr → Settings → Odoo module "
+"Paste the connection key generated on aidoo.ai → Settings → Odoo module "
 "(format: aid_odoo_…)."
 
 #. module: aidoo
@@ -218,18 +218,18 @@ msgstr "Suggested for this record"
 
 #. module: aidoo
 msgid ""
-"The API key must start with 'aid_odoo_'. Generate one on aidoo.fr → "
+"The API key must start with 'aid_odoo_'. Generate one on aidoo.ai → "
 "Settings → Odoo module."
 msgstr ""
-"The API key must start with 'aid_odoo_'. Generate one on aidoo.fr → "
+"The API key must start with 'aid_odoo_'. Generate one on aidoo.ai → "
 "Settings → Odoo module."
 
 #. module: aidoo
 msgid ""
-"The MCP URL (https://mcp.aidoo.fr/mcp) will also be copied to your clipboard "
+"The MCP URL (https://mcp.aidoo.ai/mcp) will also be copied to your clipboard "
 "when you click the button above."
 msgstr ""
-"The MCP URL (https://mcp.aidoo.fr/mcp) will also be copied to your clipboard "
+"The MCP URL (https://mcp.aidoo.ai/mcp) will also be copied to your clipboard "
 "when you click the button above."
 
 #. module: aidoo
