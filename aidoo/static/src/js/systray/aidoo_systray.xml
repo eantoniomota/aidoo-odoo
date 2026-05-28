@@ -2,22 +2,21 @@
 <templates xml:space="preserve">
 
     <t t-name="aidoo.Systray">
-        <t t-if="state.visible">
-            <Dropdown menuClass="'o-aidoo-dropdown'">
-                <button class="o_nav_entry o-aidoo-trigger" t-att-title="'Aidoo'">
-                    <svg class="o-aidoo-logo" xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="12" cy="12" r="11" fill="#2563eb"/>
-                        <text x="12" y="17" text-anchor="middle"
-                              font-family="Inter, system-ui, sans-serif"
-                              font-size="14" font-weight="700" fill="#ffffff">A</text>
-                    </svg>
-                </button>
-                <t t-set-slot="content">
-                    <AidooPanel/>
-                </t>
-            </Dropdown>
-        </t>
+        <div t-if="state.visible" class="o_menu_systray_item dropdown o-aidoo-systray">
+            <button type="button"
+                    class="btn o-aidoo-trigger"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    aria-label="Aidoo"
+                    title="Aidoo">
+                <img src="/aidoo/static/description/icon.png"
+                     alt="Aidoo"
+                     class="o-aidoo-logo"/>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end o-aidoo-dropdown">
+                <AidooPanel/>
+            </div>
+        </div>
     </t>
 
 </templates>

@@ -3,13 +3,11 @@
 import { Component, useState, onWillStart } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
-import { Dropdown } from "@web/core/dropdown/dropdown";
-import { DropdownItem } from "@web/core/dropdown/dropdown_item";
 import { AidooPanel } from "../panel/aidoo_panel";
 
 export class AidooSystray extends Component {
     static template = "aidoo.Systray";
-    static components = { Dropdown, DropdownItem, AidooPanel };
+    static components = { AidooPanel };
     static props = {};
 
     setup() {
