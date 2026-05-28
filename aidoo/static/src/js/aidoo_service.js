@@ -1,16 +1,20 @@
 /** @odoo-module **/
 
 import { registry } from "@web/core/registry";
-import { rpc } from "@web/core/network/rpc";
 
 /**
  * Aidoo service — thin client to the BFF controllers exposed by this module.
  * Caches the bootstrap and the "me" lookup so the systray dropdown opens fast.
+ *
+ * Note (Odoo 17): the standalone ``@web/core/network/rpc`` module does not
+ * exist on this branch, so we cannot import ``rpc`` directly. Instead we
+ * declare ``rpc`` as a dependency and receive it through ``start(env, deps)``
+ * — that pattern works on both 17 and 18+.
  */
 export const aidooService = {
-    dependencies: ["user"],
+    dependencies: ["user", "rpc"],
 
-    async start(env, { user }) {
+    async start(env, { user, rpc }) {
         const state = {
             bootstrap: null,
             me: null,
