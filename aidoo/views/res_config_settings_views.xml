@@ -13,6 +13,11 @@
                                  string="Aidoo connection key"
                                  help="Paste the connection key generated on your Aidoo dashboard.">
                             <div class="content-group">
+                                <!-- Hidden flag referenced by the invisible modifiers below.
+                                     Odoo 17's view validator requires every field used in a
+                                     modifier to be declared in the view, hence this stub. -->
+                                <field name="aidoo_api_key_set" invisible="1"/>
+
                                 <div class="row mt8" invisible="aidoo_api_key_set">
                                     <span class="text-warning">
                                         <i class="fa fa-warning"/>
