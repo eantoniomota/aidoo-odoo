@@ -21,7 +21,11 @@ export class AidooSystray extends Component {
 
         onWillStart(async () => {
             try {
+                // eslint-disable-next-line no-console
+                console.info("[Aidoo] systray setup — calling bootstrap…");
                 const boot = await this.aidoo.bootstrap();
+                // eslint-disable-next-line no-console
+                console.info("[Aidoo] systray bootstrap =", boot);
                 if (!boot) {
                     this.state.visible = false;
                     return;
@@ -36,8 +40,21 @@ export class AidooSystray extends Component {
                 // icon when the current Odoo user is not a member of the
                 // linked Aidoo workspace (state === "none").
                 const me = await this.aidoo.me();
+                // eslint-disable-next-line no-console
+                console.info("[Aidoo] systray me =", me);
+                if (me && (me.cloudflare_error || me.status >= 400 || me.error)) {
+                    // Upstream is reachable from the user but the Odoo server
+                    // call to api.aidoo.ai failed (Cloudflare WAF, network
+                    // outage, etc.). Keep the icon visible — the panel will
+                    // surface the error so the admin can act on it instead
+                    // of silently hiding the integration.
+                    this.state.visible = true;
+                    return;
+                }
                 this.state.visible = Boolean(me && me.state && me.state !== "none");
-            } catch (_err) {
+            } catch (err) {
+                // eslint-disable-next-line no-console
+                console.error("[Aidoo] systray setup failed", err);
                 this.state.visible = false;
             } finally {
                 this.state.loading = false;

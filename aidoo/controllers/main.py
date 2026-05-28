@@ -4,12 +4,22 @@ from urllib import request as urlrequest
 from urllib import parse as urlparse
 from urllib.error import HTTPError, URLError
 
-from odoo import http
+from odoo import http, release
 from odoo.http import request
 
 _logger = logging.getLogger(__name__)
 
 DEFAULT_TIMEOUT = 15  # seconds
+
+# Cloudflare WAF on aidoo.ai rejects requests coming from the default
+# ``Python-urllib/3.x`` user-agent (error 1010 — browser_signature_banned).
+# We send a Mozilla-compatible UA so the request passes the Browser
+# Integrity Check while still identifying ourselves honestly via the
+# ``compatible; …`` token.
+_AIDOO_USER_AGENT = (
+    f"Mozilla/5.0 (compatible; Aidoo-Odoo/{release.major_version}; "
+    "+https://aidoo.ai)"
+)
 
 
 class AidooController(http.Controller):
@@ -50,6 +60,8 @@ class AidooController(http.Controller):
         headers = {
             "Authorization": f"Bearer {cfg['api_key']}",
             "Accept": "application/json",
+            "Accept-Language": "en-US,en;q=0.9",
+            "User-Agent": _AIDOO_USER_AGENT,
         }
         if payload is not None:
             data = json.dumps(payload).encode("utf-8")

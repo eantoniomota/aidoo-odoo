@@ -1,5 +1,9 @@
+import logging
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+_logger = logging.getLogger(__name__)
 
 API_BASE_URL_PARAM = "aidoo.api_base_url"
 API_KEY_PARAM = "aidoo.api_key_encrypted"
@@ -81,9 +85,18 @@ class ResConfigSettings(models.TransientModel):
     @api.model
     def aidoo_store_api_key(self, api_key):
         if not api_key:
+            _logger.warning("[Aidoo] aidoo_store_api_key called with empty key — skipping")
             return
-        encrypted = self.env["aidoo.encryption"].encrypt(api_key)
+        try:
+            encrypted = self.env["aidoo.encryption"].encrypt(api_key)
+        except Exception as exc:
+            _logger.exception("[Aidoo] Encryption failed: %s", exc)
+            raise UserError(_(
+                "Could not encrypt the Aidoo API key. "
+                "Check the server logs and that the 'cryptography' Python package is installed."
+            )) from exc
         self.env["ir.config_parameter"].sudo().set_param(API_KEY_PARAM, encrypted)
+        _logger.info("[Aidoo] API key stored successfully (len=%d).", len(api_key))
 
     @api.model
     def aidoo_clear_credentials(self):
@@ -96,9 +109,17 @@ class ResConfigSettings(models.TransientModel):
     def set_values(self):
         super().set_values()
         for rec in self:
-            if rec.aidoo_manual_api_key:
-                key = rec.aidoo_manual_api_key.strip()
+            raw = rec.aidoo_manual_api_key or ""
+            _logger.info(
+                "[Aidoo] set_values: manual_api_key provided=%s (len=%d)",
+                bool(raw), len(raw),
+            )
+            if raw:
+                key = raw.strip()
                 if not key.startswith("aid_odoo_"):
+                    _logger.warning(
+                        "[Aidoo] set_values: rejected key (bad prefix, len=%d)", len(key)
+                    )
                     raise UserError(_(
                         "The API key must start with 'aid_odoo_'. "
                         "Generate one on aidoo.ai → Settings → Odoo module."
@@ -122,6 +143,66 @@ class ResConfigSettings(models.TransientModel):
 
     def action_aidoo_disconnect(self):
         self.aidoo_clear_credentials()
+        return {
+            "type": "ir.actions.client",
+            "tag": "reload",
+        }
+
+    # ------------------------------------------------------------------
+    # Explicit "Connect" button — preferred path because the implicit
+    # ``set_values()`` save flow has been observed to silently drop the
+    # manual key value in some setups.
+    # ------------------------------------------------------------------
+
+    def action_aidoo_connect_apply_key(self):
+        self.ensure_one()
+        raw = (self.aidoo_manual_api_key or "").strip()
+        _logger.info(
+            "[Aidoo] action_aidoo_connect_apply_key: input_len=%d", len(raw)
+        )
+        if not raw:
+            raise UserError(_(
+                "Please paste your Aidoo connection key in the field above "
+                "before clicking Connect."
+            ))
+        if not raw.startswith("aid_odoo_"):
+            raise UserError(_(
+                "The API key must start with 'aid_odoo_'. "
+                "Generate one on aidoo.ai → Settings → Odoo module."
+            ))
+
+        # Store and force-commit so the param survives any savepoint /
+        # rollback that Odoo could wrap our action with.
+        self.aidoo_store_api_key(raw)
+        self.env.cr.commit()
+
+        # Read it back immediately to confirm persistence is real.
+        stored = self.env["ir.config_parameter"].sudo().get_param(
+            API_KEY_PARAM, ""
+        )
+        _logger.info(
+            "[Aidoo] action_aidoo_connect_apply_key: stored_len=%d", len(stored)
+        )
+        if not stored:
+            raise UserError(_(
+                "Aidoo could not persist the API key (ir.config_parameter "
+                "returned empty after set_param). Check the server logs for "
+                "the [Aidoo] entries and report back."
+            ))
+
+        decrypted = self.aidoo_get_api_key()
+        _logger.info(
+            "[Aidoo] action_aidoo_connect_apply_key: decrypted_len=%d",
+            len(decrypted),
+        )
+        if not decrypted:
+            raise UserError(_(
+                "The key was stored but cannot be decrypted (database.secret "
+                "may have rotated). Disconnect and re-connect, or restore "
+                "the original database.secret value."
+            ))
+
+        self.aidoo_manual_api_key = False
         return {
             "type": "ir.actions.client",
             "tag": "reload",

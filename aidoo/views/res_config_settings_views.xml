@@ -33,8 +33,16 @@
 
                                 <div class="row mt16">
                                     <label for="aidoo_manual_api_key" class="col-3 o_light_label"/>
-                                    <field name="aidoo_manual_api_key" password="True"
-                                           placeholder="aid_odoo_prod_..."/>
+                                    <div class="col-9 d-flex align-items-center">
+                                        <field name="aidoo_manual_api_key"
+                                               widget="char"
+                                               class="flex-grow-1"
+                                               placeholder="aid_odoo_prod_..."/>
+                                        <button name="action_aidoo_connect_apply_key"
+                                                type="object"
+                                                string="Connect"
+                                                class="btn btn-primary ms-2"/>
+                                    </div>
                                 </div>
 
                                 <div class="row mt8">
