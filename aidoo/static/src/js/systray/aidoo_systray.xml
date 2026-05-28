@@ -5,7 +5,13 @@
         <t t-if="state.visible">
             <Dropdown menuClass="'o-aidoo-dropdown'">
                 <button class="o_nav_entry o-aidoo-trigger" t-att-title="'Aidoo'">
-                    <span class="o-aidoo-logo" aria-hidden="true"/>
+                    <svg class="o-aidoo-logo" xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="11" fill="#2563eb"/>
+                        <text x="12" y="17" text-anchor="middle"
+                              font-family="Inter, system-ui, sans-serif"
+                              font-size="14" font-weight="700" fill="#ffffff">A</text>
+                    </svg>
                 </button>
                 <t t-set-slot="content">
                     <AidooPanel/>
