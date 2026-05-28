@@ -148,6 +148,33 @@ class ResConfigSettings(models.TransientModel):
             "tag": "reload",
         }
 
+    # ------------------------------------------------------------------
+    # Explicit "Connect" button — preferred path on Odoo 17 where the
+    # implicit ``set_values()`` save flow has been observed to silently
+    # drop the manual key value in some setups.
+    # ------------------------------------------------------------------
+
+    def action_aidoo_connect_apply_key(self):
+        self.ensure_one()
+        raw = (self.aidoo_manual_api_key or "").strip()
+        _logger.info("[Aidoo] action_aidoo_connect_apply_key: len=%d", len(raw))
+        if not raw:
+            raise UserError(_(
+                "Please paste your Aidoo connection key in the field above "
+                "before clicking Connect."
+            ))
+        if not raw.startswith("aid_odoo_"):
+            raise UserError(_(
+                "The API key must start with 'aid_odoo_'. "
+                "Generate one on aidoo.ai → Settings → Odoo module."
+            ))
+        self.aidoo_store_api_key(raw)
+        self.aidoo_manual_api_key = False
+        return {
+            "type": "ir.actions.client",
+            "tag": "reload",
+        }
+
     def action_aidoo_reload_translations(self):
         """Re-load the .po files of the aidoo module for every active language.
         Useful when languages were activated after the module was installed.

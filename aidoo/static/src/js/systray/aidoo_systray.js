@@ -21,7 +21,11 @@ export class AidooSystray extends Component {
 
         onWillStart(async () => {
             try {
+                // eslint-disable-next-line no-console
+                console.info("[Aidoo] systray setup — calling bootstrap…");
                 const boot = await this.aidoo.bootstrap();
+                // eslint-disable-next-line no-console
+                console.info("[Aidoo] systray bootstrap =", boot);
                 if (!boot) {
                     this.state.visible = false;
                     return;
@@ -36,8 +40,12 @@ export class AidooSystray extends Component {
                 // icon when the current Odoo user is not a member of the
                 // linked Aidoo workspace (state === "none").
                 const me = await this.aidoo.me();
+                // eslint-disable-next-line no-console
+                console.info("[Aidoo] systray me =", me);
                 this.state.visible = Boolean(me && me.state && me.state !== "none");
-            } catch (_err) {
+            } catch (err) {
+                // eslint-disable-next-line no-console
+                console.error("[Aidoo] systray setup failed", err);
                 this.state.visible = false;
             } finally {
                 this.state.loading = false;

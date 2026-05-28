@@ -21,6 +21,11 @@ export const aidooService = {
     dependencies: ["rpc"],
 
     async start(env, { rpc }) {
+        // Visible boot marker — if this never logs, the service did not
+        // start (missing dep, asset bundle issue, …) and the systray will
+        // stay invisible.
+        // eslint-disable-next-line no-console
+        console.info("[Aidoo] service starting…");
         const state = {
             bootstrap: null,
             me: null,
