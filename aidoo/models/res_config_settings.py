@@ -1,5 +1,9 @@
+import logging
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+_logger = logging.getLogger(__name__)
 
 API_BASE_URL_PARAM = "aidoo.api_base_url"
 API_KEY_PARAM = "aidoo.api_key_encrypted"
@@ -81,9 +85,18 @@ class ResConfigSettings(models.TransientModel):
     @api.model
     def aidoo_store_api_key(self, api_key):
         if not api_key:
+            _logger.warning("[Aidoo] aidoo_store_api_key called with empty key — skipping")
             return
-        encrypted = self.env["aidoo.encryption"].encrypt(api_key)
+        try:
+            encrypted = self.env["aidoo.encryption"].encrypt(api_key)
+        except Exception as exc:
+            _logger.exception("[Aidoo] Encryption failed: %s", exc)
+            raise UserError(_(
+                "Could not encrypt the Aidoo API key. "
+                "Check the server logs and that the 'cryptography' Python package is installed."
+            )) from exc
         self.env["ir.config_parameter"].sudo().set_param(API_KEY_PARAM, encrypted)
+        _logger.info("[Aidoo] API key stored successfully (len=%d).", len(api_key))
 
     @api.model
     def aidoo_clear_credentials(self):
@@ -96,9 +109,17 @@ class ResConfigSettings(models.TransientModel):
     def set_values(self):
         super().set_values()
         for rec in self:
-            if rec.aidoo_manual_api_key:
-                key = rec.aidoo_manual_api_key.strip()
+            raw = rec.aidoo_manual_api_key or ""
+            _logger.info(
+                "[Aidoo] set_values: manual_api_key provided=%s (len=%d)",
+                bool(raw), len(raw),
+            )
+            if raw:
+                key = raw.strip()
                 if not key.startswith("aid_odoo_"):
+                    _logger.warning(
+                        "[Aidoo] set_values: rejected key (bad prefix, len=%d)", len(key)
+                    )
                     raise UserError(_(
                         "The API key must start with 'aid_odoo_'. "
                         "Generate one on aidoo.ai → Settings → Odoo module."
