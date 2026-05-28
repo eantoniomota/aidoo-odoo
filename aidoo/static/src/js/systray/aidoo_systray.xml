@@ -6,6 +6,7 @@
             <button type="button"
                     class="btn o-aidoo-trigger"
                     data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside"
                     aria-expanded="false"
                     aria-label="Aidoo"
                     title="Aidoo">
