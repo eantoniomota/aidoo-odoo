@@ -1,19 +1,21 @@
 import logging
 
-from odoo import api, SUPERUSER_ID
 from . import models
 from . import controllers
 
 _logger = logging.getLogger(__name__)
 
 
-def post_init_hook(cr, registry):
+def post_init_hook(env):
     """Force-load translations for every active language right after install
     or upgrade. Without this, the module's .po files are only loaded for
     languages that were already active when the module was first installed,
     and the UI stays in English even on a French Odoo.
+
+    Signature note: Odoo unified post_init_hook to ``(env)`` even on the
+    17.0 branch in recent maintenance releases — the older ``(cr, registry)``
+    signature now raises ``TypeError: missing 1 required positional argument``.
     """
-    env = api.Environment(cr, SUPERUSER_ID, {})
     _reload_aidoo_translations(env)
 
 
