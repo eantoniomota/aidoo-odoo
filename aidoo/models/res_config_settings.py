@@ -47,10 +47,6 @@ class ResConfigSettings(models.TransientModel):
         for rec in self:
             rec.aidoo_api_key_set = bool(encrypted)
 
-    # ------------------------------------------------------------------
-    # Interface language for the current Odoo user
-    # ------------------------------------------------------------------
-
     @api.model
     def _aidoo_get_lang_selection(self):
         langs = self.env["res.lang"].search([("active", "=", True)])
@@ -58,15 +54,9 @@ class ResConfigSettings(models.TransientModel):
 
     @api.model
     def get_values(self):
-        # Hook into Odoo's TransientModel mechanic so the language picker
-        # always opens on the current user's actual language.
         res = super().get_values()
         res["aidoo_user_lang"] = self.env.user.lang
         return res
-
-    # ------------------------------------------------------------------
-    # Helpers consumed by controllers/tests
-    # ------------------------------------------------------------------
 
     @api.model
     def aidoo_get_api_base_url(self):
@@ -85,41 +75,28 @@ class ResConfigSettings(models.TransientModel):
     @api.model
     def aidoo_store_api_key(self, api_key):
         if not api_key:
-            _logger.warning("[Aidoo] aidoo_store_api_key called with empty key — skipping")
             return
         try:
             encrypted = self.env["aidoo.encryption"].encrypt(api_key)
         except Exception as exc:
-            _logger.exception("[Aidoo] Encryption failed: %s", exc)
+            _logger.exception("Aidoo: API key encryption failed")
             raise UserError(_(
                 "Could not encrypt the Aidoo API key. "
                 "Check the server logs and that the 'cryptography' Python package is installed."
             )) from exc
         self.env["ir.config_parameter"].sudo().set_param(API_KEY_PARAM, encrypted)
-        _logger.info("[Aidoo] API key stored successfully (len=%d).", len(api_key))
 
     @api.model
     def aidoo_clear_credentials(self):
         self.env["ir.config_parameter"].sudo().set_param(API_KEY_PARAM, "")
 
-    # ------------------------------------------------------------------
-    # Inverse for manual key (writes the encrypted version)
-    # ------------------------------------------------------------------
-
     def set_values(self):
         super().set_values()
         for rec in self:
             raw = rec.aidoo_manual_api_key or ""
-            _logger.info(
-                "[Aidoo] set_values: manual_api_key provided=%s (len=%d)",
-                bool(raw), len(raw),
-            )
             if raw:
                 key = raw.strip()
                 if not key.startswith("aid_odoo_"):
-                    _logger.warning(
-                        "[Aidoo] set_values: rejected key (bad prefix, len=%d)", len(key)
-                    )
                     raise UserError(_(
                         "The API key must start with 'aid_odoo_'. "
                         "Generate one on aidoo.ai → Settings → Odoo module."
@@ -127,19 +104,10 @@ class ResConfigSettings(models.TransientModel):
                 self.aidoo_store_api_key(key)
                 rec.aidoo_manual_api_key = False
 
-            # Apply the language change to the current Odoo user. Refresh of
-            # the page is needed for the change to be visible everywhere.
             if rec.aidoo_user_lang and rec.aidoo_user_lang != self.env.user.lang:
                 self.env.user.sudo().lang = rec.aidoo_user_lang
-                # Make sure the aidoo .po for that language is loaded —
-                # otherwise the panel falls back to English even though the
-                # user just selected French.
                 from .. import _reload_aidoo_translations
                 _reload_aidoo_translations(self.env)
-
-    # ------------------------------------------------------------------
-    # Disconnect button
-    # ------------------------------------------------------------------
 
     def action_aidoo_disconnect(self):
         self.aidoo_clear_credentials()
@@ -148,18 +116,9 @@ class ResConfigSettings(models.TransientModel):
             "tag": "reload",
         }
 
-    # ------------------------------------------------------------------
-    # Explicit "Connect" button — preferred path on Odoo 17 where the
-    # implicit ``set_values()`` save flow has been observed to silently
-    # drop the manual key value in some setups.
-    # ------------------------------------------------------------------
-
     def action_aidoo_connect_apply_key(self):
         self.ensure_one()
         raw = (self.aidoo_manual_api_key or "").strip()
-        _logger.info(
-            "[Aidoo] action_aidoo_connect_apply_key: input_len=%d", len(raw)
-        )
         if not raw:
             raise UserError(_(
                 "Please paste your Aidoo connection key in the field above "
@@ -171,38 +130,22 @@ class ResConfigSettings(models.TransientModel):
                 "Generate one on aidoo.ai → Settings → Odoo module."
             ))
 
-        # Store and force-commit so the param survives any savepoint /
-        # rollback that Odoo could wrap our action with.
         self.aidoo_store_api_key(raw)
         self.env.cr.commit()
 
-        # Read it back immediately to confirm persistence is real.
         stored = self.env["ir.config_parameter"].sudo().get_param(
             API_KEY_PARAM, ""
         )
-        _logger.info(
-            "[Aidoo] action_aidoo_connect_apply_key: stored_len=%d", len(stored)
-        )
         if not stored:
             raise UserError(_(
-                "Aidoo could not persist the API key (ir.config_parameter "
-                "returned empty after set_param). Check the server logs for "
-                "the [Aidoo] entries and report back."
+                "Aidoo could not persist the API key. "
+                "Check the server logs and try again."
             ))
 
-        # Sanity-check that the encryption round-trip works — if it does
-        # not, the AES key derived from database.secret has likely changed
-        # since the key was stored.
-        decrypted = self.aidoo_get_api_key()
-        _logger.info(
-            "[Aidoo] action_aidoo_connect_apply_key: decrypted_len=%d",
-            len(decrypted),
-        )
-        if not decrypted:
+        if not self.aidoo_get_api_key():
             raise UserError(_(
-                "The key was stored but cannot be decrypted (database.secret "
-                "may have rotated). Disconnect and re-connect, or restore "
-                "the original database.secret value."
+                "The key was stored but cannot be decrypted. "
+                "Disconnect and reconnect, then try again."
             ))
 
         self.aidoo_manual_api_key = False
@@ -212,9 +155,6 @@ class ResConfigSettings(models.TransientModel):
         }
 
     def action_aidoo_reload_translations(self):
-        """Re-load the .po files of the aidoo module for every active language.
-        Useful when languages were activated after the module was installed.
-        """
         if not self.env.user.has_group("aidoo.group_aidoo_admin"):
             raise UserError(_(
                 "Only Aidoo administrators can reload the translations."
