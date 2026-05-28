@@ -27,7 +27,7 @@ export class ClaudeTab extends Component {
     }
 
     get connectorUrl() {
-        return this.props.mcpUrl || "https://mcp.aidoo.fr/mcp";
+        return this.props.mcpUrl || "https://mcp.aidoo.ai/mcp";
     }
 
     async copyValue(value, field) {

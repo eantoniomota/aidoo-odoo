@@ -29,7 +29,7 @@ export class AidooNoToken extends Component {
     }
 
     get signupUrl() {
-        return this.props.signupUrl || "https://app.aidoo.fr/register";
+        return this.props.signupUrl || "https://app.aidoo.ai/register";
     }
 
     async openSettings() {
