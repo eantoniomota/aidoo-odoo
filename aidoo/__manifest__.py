@@ -1,12 +1,12 @@
 {
     "name": "Aidoo",
-    "version": "17.0.1.1.4",
+    "version": "17.0.1.2.0",
     "summary": "Bring the Aidoo AI assistant inside Odoo: workflows, executions and contextual actions.",
     "description": """
 Aidoo — AI assistant for Odoo
 =============================
 
-This module connects Odoo to the Aidoo platform (https://aidoo.fr) and adds an
+This module connects Odoo to the Aidoo platform (https://aidoo.ai) and adds an
 Aidoo button in the Odoo systray.
 
 Features:
@@ -15,12 +15,12 @@ Features:
 - Context-aware: compatible workflows are highlighted on the current record.
 - Secure: API key encrypted with AES-256-GCM, scoped per Odoo instance.
 
-Requires an Aidoo account at https://aidoo.fr.
+Requires an Aidoo account at https://aidoo.ai.
 """,
     "author": "PLANOR",
     "maintainer": "PLANOR",
-    "support": "esteban.antonio-mota@aidoo.fr",
-    "website": "https://aidoo.fr",
+    "support": "esteban.antonio-mota@aidoo.ai",
+    "website": "https://aidoo.ai",
     "license": "LGPL-3",
     "category": "Productivity/AI",
     "depends": ["base", "web"],

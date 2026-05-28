@@ -5,7 +5,7 @@ import { useService } from "@web/core/utils/hooks";
 import { t as _t } from "../i18n/translations";
 
 const CONNECTOR_NAME = "Aidoo";
-const CONNECTOR_URL = "https://mcp.aidoo.fr/mcp";
+const CONNECTOR_URL = "https://mcp.aidoo.ai/mcp";
 
 export class AidooNoClaude extends Component {
     static template = "aidoo.NoClaude";
@@ -28,7 +28,7 @@ export class AidooNoClaude extends Component {
             copiedNotice: _t("Copied to clipboard."),
             ctaIdle: _t("Open Claude connectors"),
             ctaOpening: _t("Opening Claude…"),
-            footer: _t("The MCP URL (https://mcp.aidoo.fr/mcp) will also be copied to your clipboard when you click the button above."),
+            footer: _t("The MCP URL (https://mcp.aidoo.ai/mcp) will also be copied to your clipboard when you click the button above."),
         };
     }
 

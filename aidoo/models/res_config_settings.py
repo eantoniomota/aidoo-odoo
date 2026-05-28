@@ -3,7 +3,7 @@ from odoo.exceptions import UserError
 
 API_BASE_URL_PARAM = "aidoo.api_base_url"
 API_KEY_PARAM = "aidoo.api_key_encrypted"
-DEFAULT_API_BASE_URL = "https://api.aidoo.fr"
+DEFAULT_API_BASE_URL = "https://api.aidoo.ai"
 
 
 class ResConfigSettings(models.TransientModel):
@@ -13,7 +13,7 @@ class ResConfigSettings(models.TransientModel):
         string="Aidoo API base URL",
         config_parameter=API_BASE_URL_PARAM,
         default=DEFAULT_API_BASE_URL,
-        help="Base URL of the Aidoo API. Defaults to https://api.aidoo.fr.",
+        help="Base URL of the Aidoo API. Defaults to https://api.aidoo.ai.",
     )
     aidoo_api_key_set = fields.Boolean(
         string="API key configured",
@@ -22,7 +22,7 @@ class ResConfigSettings(models.TransientModel):
     aidoo_manual_api_key = fields.Char(
         string="API key",
         help=(
-            "Paste the connection key generated on aidoo.fr → "
+            "Paste the connection key generated on aidoo.ai → "
             "Settings → Odoo module (format: aid_odoo_…)."
         ),
     )
@@ -101,7 +101,7 @@ class ResConfigSettings(models.TransientModel):
                 if not key.startswith("aid_odoo_"):
                     raise UserError(_(
                         "The API key must start with 'aid_odoo_'. "
-                        "Generate one on aidoo.fr → Settings → Odoo module."
+                        "Generate one on aidoo.ai → Settings → Odoo module."
                     ))
                 self.aidoo_store_api_key(key)
                 rec.aidoo_manual_api_key = False

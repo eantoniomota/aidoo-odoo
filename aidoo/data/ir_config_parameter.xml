@@ -3,7 +3,7 @@
 
     <record id="aidoo_api_base_url" model="ir.config_parameter">
         <field name="key">aidoo.api_base_url</field>
-        <field name="value">https://api.aidoo.fr</field>
+        <field name="value">https://api.aidoo.ai</field>
     </record>
 
 </odoo>
