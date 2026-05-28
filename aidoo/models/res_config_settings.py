@@ -157,7 +157,9 @@ class ResConfigSettings(models.TransientModel):
     def action_aidoo_connect_apply_key(self):
         self.ensure_one()
         raw = (self.aidoo_manual_api_key or "").strip()
-        _logger.info("[Aidoo] action_aidoo_connect_apply_key: len=%d", len(raw))
+        _logger.info(
+            "[Aidoo] action_aidoo_connect_apply_key: input_len=%d", len(raw)
+        )
         if not raw:
             raise UserError(_(
                 "Please paste your Aidoo connection key in the field above "
@@ -168,7 +170,41 @@ class ResConfigSettings(models.TransientModel):
                 "The API key must start with 'aid_odoo_'. "
                 "Generate one on aidoo.ai → Settings → Odoo module."
             ))
+
+        # Store and force-commit so the param survives any savepoint /
+        # rollback that Odoo could wrap our action with.
         self.aidoo_store_api_key(raw)
+        self.env.cr.commit()
+
+        # Read it back immediately to confirm persistence is real.
+        stored = self.env["ir.config_parameter"].sudo().get_param(
+            API_KEY_PARAM, ""
+        )
+        _logger.info(
+            "[Aidoo] action_aidoo_connect_apply_key: stored_len=%d", len(stored)
+        )
+        if not stored:
+            raise UserError(_(
+                "Aidoo could not persist the API key (ir.config_parameter "
+                "returned empty after set_param). Check the server logs for "
+                "the [Aidoo] entries and report back."
+            ))
+
+        # Sanity-check that the encryption round-trip works — if it does
+        # not, the AES key derived from database.secret has likely changed
+        # since the key was stored.
+        decrypted = self.aidoo_get_api_key()
+        _logger.info(
+            "[Aidoo] action_aidoo_connect_apply_key: decrypted_len=%d",
+            len(decrypted),
+        )
+        if not decrypted:
+            raise UserError(_(
+                "The key was stored but cannot be decrypted (database.secret "
+                "may have rotated). Disconnect and re-connect, or restore "
+                "the original database.secret value."
+            ))
+
         self.aidoo_manual_api_key = False
         return {
             "type": "ir.actions.client",
