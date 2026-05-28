@@ -11,11 +11,6 @@ _logger = logging.getLogger(__name__)
 
 DEFAULT_TIMEOUT = 15  # seconds
 
-# Cloudflare WAF on aidoo.ai rejects requests coming from the default
-# ``Python-urllib/3.x`` user-agent (error 1010 — browser_signature_banned).
-# We send a Mozilla-compatible UA so the request passes the Browser
-# Integrity Check while still identifying ourselves honestly via the
-# ``compatible; …`` token.
 _AIDOO_USER_AGENT = (
     f"Mozilla/5.0 (compatible; Aidoo-Odoo/{release.major_version}; "
     "+https://aidoo.ai)"
