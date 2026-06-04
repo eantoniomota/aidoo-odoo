@@ -57,6 +57,12 @@
                                 t-on-click="() => this.selectTab('claude')"
                                 t-esc="labels.tabClaude"/>
                     </li>
+                    <li class="nav-item">
+                        <button class="nav-link"
+                                t-att-class="{ 'active': state.tab === 'builder' }"
+                                t-on-click="() => this.selectTab('builder')"
+                                t-esc="labels.tabBuilder"/>
+                    </li>
                 </ul>
 
                 <div class="o-aidoo-tab-content p-2">
@@ -68,6 +74,9 @@
                     </t>
                     <t t-elif="state.tab === 'claude'">
                         <ClaudeTab mcpUrl="state.resolved?.mcpUrl"/>
+                    </t>
+                    <t t-elif="state.tab === 'builder'">
+                        <BuilderTab/>
                     </t>
                 </div>
             </t>

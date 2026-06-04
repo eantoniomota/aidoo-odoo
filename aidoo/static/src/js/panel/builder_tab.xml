@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="aidoo.BuilderTab">
+        <div class="o-aidoo-builder-tab">
+
+            <t t-if="state.loading">
+                <div class="text-center text-muted py-3">
+                    <i class="fa fa-circle-o-notch fa-spin me-1"/>
+                </div>
+            </t>
+
+            <t t-elif="state.signupUrl">
+                <div class="alert alert-warning small">
+                    <div class="fw-bold mb-1" t-esc="labels.notMappedTitle"/>
+                    <div t-esc="labels.notMappedHint" class="mb-2"/>
+                    <button type="button" class="btn btn-sm btn-primary"
+                            t-on-click="() => this.openSignup()">
+                        <i class="fa fa-external-link me-1"/>
+                        <span t-esc="labels.openSignup"/>
+                    </button>
+                </div>
+            </t>
+
+            <t t-elif="state.error">
+                <div class="alert alert-danger small">
+                    <strong t-esc="labels.errorTitle"/>: <span t-esc="state.error"/>
+                </div>
+            </t>
+
+            <t t-elif="state.dashboards.length === 0">
+                <div class="text-center text-muted py-3 small" t-esc="labels.empty"/>
+            </t>
+
+            <t t-else="">
+                <ul class="list-group list-group-flush">
+                    <li t-foreach="state.dashboards" t-as="dash" t-key="dash.id"
+                        class="list-group-item d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="fw-semibold" t-esc="dash.name"/>
+                            <div class="text-muted small">
+                                <span t-esc="labels.pagesPrefix"/>:
+                                <span t-esc="dash.pages?.length || 0"/>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-primary"
+                                t-on-click="() => this.openDashboard(dash)">
+                            <i class="fa fa-external-link me-1"/>
+                            <span t-esc="labels.openDashboard"/>
+                        </button>
+                    </li>
+                </ul>
+            </t>
+        </div>
+    </t>
+
+</templates>

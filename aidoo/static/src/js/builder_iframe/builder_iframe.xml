@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="aidoo.BuilderIframe">
+        <div class="o-aidoo-builder-fullscreen d-flex flex-column"
+             style="position: absolute; inset: 0; background: #fff;">
+            <t t-if="state.error">
+                <div class="alert alert-danger m-3 small" t-esc="state.error"/>
+            </t>
+            <iframe t-ref="iframe"
+                    t-att-src="iframeSrc"
+                    class="flex-grow-1"
+                    style="border: 0;"
+                    referrerpolicy="strict-origin"
+                    allow="clipboard-read; clipboard-write; downloads"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-downloads"/>
+        </div>
+    </t>
+
+</templates>

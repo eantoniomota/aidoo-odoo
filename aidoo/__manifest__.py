@@ -1,6 +1,6 @@
 {
     "name": "Aidoo",
-    "version": "19.0.1.3.0",
+    "version": "19.0.1.4.0",
     "summary": "Bring the Aidoo AI assistant inside Odoo: workflows, executions and contextual actions.",
     "description": """
 Aidoo — AI assistant for Odoo
@@ -50,6 +50,10 @@ Requires an Aidoo account at https://aidoo.ai.
             "aidoo/static/src/js/panel/workflow_form.xml",
             "aidoo/static/src/js/panel/claude_tab.js",
             "aidoo/static/src/js/panel/claude_tab.xml",
+            "aidoo/static/src/js/panel/builder_tab.js",
+            "aidoo/static/src/js/panel/builder_tab.xml",
+            "aidoo/static/src/js/builder_iframe/builder_iframe.js",
+            "aidoo/static/src/js/builder_iframe/builder_iframe.xml",
             "aidoo/static/src/js/auth/invited.js",
             "aidoo/static/src/js/auth/invited.xml",
             "aidoo/static/src/js/auth/no_claude.js",

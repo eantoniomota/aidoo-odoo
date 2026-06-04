@@ -56,6 +56,13 @@ export const aidooService = {
                 invalidate();
                 return rpc("/aidoo/disconnect", {});
             },
+            // ----- Builder -------------------------------------------------
+            listBuilderDashboards() {
+                return rpc("/aidoo/builder/dashboards", {});
+            },
+            requestBuilderSsoToken() {
+                return rpc("/aidoo/builder/sso-token", {});
+            },
         };
     },
 };

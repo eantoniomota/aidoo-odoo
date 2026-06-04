@@ -9,6 +9,7 @@ import { AidooNoToken } from "../auth/no_token";
 import { ExecutionsTab } from "./executions_tab";
 import { WorkflowsTab } from "./workflows_tab";
 import { ClaudeTab } from "./claude_tab";
+import { BuilderTab } from "./builder_tab";
 
 function readActiveContext(env) {
     try {
@@ -37,6 +38,7 @@ export class AidooPanel extends Component {
         ExecutionsTab,
         WorkflowsTab,
         ClaudeTab,
+        BuilderTab,
     };
     static props = {};
 
@@ -55,6 +57,7 @@ export class AidooPanel extends Component {
             tabExecutions: _t("Executions"),
             tabWorkflows: _t("Workflows"),
             tabClaude: _t("Claude"),
+            tabBuilder: _t("Builder"),
             openClaude: _t("Open Claude"),
         };
 

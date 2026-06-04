@@ -141,6 +141,32 @@ class AidooController(http.Controller):
         )
 
     # ------------------------------------------------------------------
+    # Builder SSO endpoints
+    #
+    # The Odoo user's email is sent to api.aidoo.ai which mints a 60-second
+    # bootstrap token if the email matches an Aidoo member of the company.
+    # The OWL component then injects this token into the iframe via
+    # postMessage (Option D in the SSO design). On mapping failure we return
+    # the signup_url so the SPA can fall back to the OIDC code flow.
+    # ------------------------------------------------------------------
+
+    @http.route("/aidoo/builder/dashboards", type="json", auth="user")
+    def builder_dashboards(self, **_kw):
+        return self._aidoo_request(
+            "GET",
+            "/builder/dashboards",
+            params={"email": self._current_email()},
+        )
+
+    @http.route("/aidoo/builder/sso-token", type="json", auth="user")
+    def builder_sso_token(self, **_kw):
+        return self._aidoo_request(
+            "POST",
+            "/builder/sso-exchange",
+            payload={"email": self._current_email()},
+        )
+
+    # ------------------------------------------------------------------
     # Bootstrap: lightweight endpoint to know if the systray should appear
     # ------------------------------------------------------------------
 
@@ -153,4 +179,5 @@ class AidooController(http.Controller):
             "base_url": cfg["base_url"],
             "isAdmin": is_admin,
             "signupUrl": "https://app.aidoo.ai/register",
+            "builderUrl": "https://builder.aidoo.fr",
         }
