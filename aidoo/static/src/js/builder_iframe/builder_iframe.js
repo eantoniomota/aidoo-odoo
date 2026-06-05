@@ -9,7 +9,7 @@ import { t as _t } from "../i18n/translations";
  * Fullscreen Builder iframe with a postMessage handshake for SSO.
  *
  * Flow (Option D):
- *   1. iframe boots with no token at builder.aidoo.fr/embed?dashboardId=...
+ *   1. iframe boots with no token at builder.aidoo.ai/embed?dashboardId=...
  *   2. iframe posts { type: "aidoo:request-bootstrap" } to the parent
  *   3. parent (this component) checks `event.origin` matches the expected
  *      Builder origin, then calls /aidoo/builder/sso-token to get a 60-second
@@ -59,7 +59,7 @@ export class AidooBuilderIframe extends Component {
         // Embed URL — token is NEVER passed in the URL (postMessage instead).
         // The dashboardId param is non-sensitive (just routing inside the SPA).
         const dashId = encodeURIComponent(this.dashboardId);
-        return `https://builder.aidoo.fr/embed?dashboardId=${dashId}&origin=odoo`;
+        return `https://builder.aidoo.ai/embed?dashboardId=${dashId}&origin=odoo`;
     }
 
     async _onMessage(event) {
@@ -109,7 +109,7 @@ export class AidooBuilderIframe extends Component {
         // generated browser-side. Phase-2: have the SPA itself handle the
         // fallback so the user stays on the iframe-driven flow.
         const dashId = encodeURIComponent(this.dashboardId);
-        const target = `https://builder.aidoo.fr/auth/start?dashboardId=${dashId}`;
+        const target = `https://builder.aidoo.ai/auth/start?dashboardId=${dashId}`;
         if (this.iframeRef.el) {
             this.iframeRef.el.src = target;
         }

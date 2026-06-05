@@ -179,5 +179,5 @@ class AidooController(http.Controller):
             "base_url": cfg["base_url"],
             "isAdmin": is_admin,
             "signupUrl": "https://app.aidoo.ai/register",
-            "builderUrl": "https://builder.aidoo.fr",
+            "builderUrl": "https://builder.aidoo.ai",
         }
